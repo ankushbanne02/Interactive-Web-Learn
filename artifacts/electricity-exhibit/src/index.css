@@ -55,46 +55,46 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 222 47% 5%;
-  --foreground: 210 40% 98%;
-  --border: 217 32% 17%;
-  --input: 217 32% 17%;
-  --ring: 199 89% 48%;
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --border: 220 14% 90%;
+  --input: 220 14% 90%;
+  --ring: 262 83% 58%;
 
-  --card: 222 47% 8%;
-  --card-foreground: 210 40% 98%;
-  --card-border: 217 32% 17%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --card-border: 220 14% 90%;
 
-  --popover: 222 47% 8%;
-  --popover-foreground: 210 40% 98%;
-  --popover-border: 217 32% 17%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --popover-border: 220 14% 90%;
 
-  --primary: 199 89% 48%;
-  --primary-foreground: 222 47% 5%;
+  --primary: 262 83% 58%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 263 70% 50%;
-  --secondary-foreground: 210 40% 98%;
+  --secondary: 199 89% 48%;
+  --secondary-foreground: 0 0% 100%;
 
-  --muted: 217 32% 17%;
-  --muted-foreground: 215 20% 65%;
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 9% 46%;
 
   --accent: 38 92% 50%;
-  --accent-foreground: 222 47% 5%;
+  --accent-foreground: 222 47% 11%;
 
   --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive-foreground: 0 0% 100%;
 
-  --sidebar: 222 47% 7%;
-  --sidebar-foreground: 210 40% 98%;
-  --sidebar-border: 217 32% 17%;
-  --sidebar-primary: 199 89% 48%;
-  --sidebar-primary-foreground: 222 47% 5%;
-  --sidebar-accent: 217 32% 17%;
-  --sidebar-accent-foreground: 210 40% 98%;
-  --sidebar-ring: 199 89% 48%;
+  --sidebar: 220 14% 97%;
+  --sidebar-foreground: 222 47% 11%;
+  --sidebar-border: 220 14% 90%;
+  --sidebar-primary: 262 83% 58%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 220 14% 94%;
+  --sidebar-accent-foreground: 222 47% 11%;
+  --sidebar-ring: 262 83% 58%;
 
-  --chart-1: 199 89% 48%;
-  --chart-2: 263 70% 50%;
+  --chart-1: 262 83% 58%;
+  --chart-2: 199 89% 48%;
   --chart-3: 38 92% 50%;
   --chart-4: 142 71% 45%;
   --chart-5: 0 84% 60%;
@@ -104,25 +104,25 @@
   --app-font-mono: Menlo, monospace;
   --radius: 0.75rem;
 
-  --shadow-2xs: 0px 1px 2px 0px rgba(0,0,0,0.5);
-  --shadow-xs: 0px 2px 4px 0px rgba(0,0,0,0.5);
-  --shadow-sm: 0px 2px 4px 0px rgba(0,0,0,0.5), 0px 1px 2px -1px rgba(0,0,0,0.5);
-  --shadow: 0px 4px 8px 0px rgba(0,0,0,0.5), 0px 2px 4px -1px rgba(0,0,0,0.4);
-  --shadow-md: 0px 8px 16px 0px rgba(0,0,0,0.5), 0px 4px 8px -1px rgba(0,0,0,0.4);
-  --shadow-lg: 0px 16px 32px 0px rgba(0,0,0,0.5), 0px 8px 16px -1px rgba(0,0,0,0.4);
-  --shadow-xl: 0px 24px 48px 0px rgba(0,0,0,0.5), 0px 16px 32px -1px rgba(0,0,0,0.4);
-  --shadow-2xl: 0px 32px 64px 0px rgba(0,0,0,0.5);
+  --shadow-2xs: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-xs: 0 2px 4px rgba(0,0,0,0.07);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
+  --shadow: 0 4px 16px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.07);
+  --shadow-md: 0 8px 24px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,0.14), 0 8px 18px rgba(0,0,0,0.09);
+  --shadow-xl: 0 24px 60px rgba(0,0,0,0.16), 0 16px 32px rgba(0,0,0,0.10);
+  --shadow-2xl: 0 32px 80px rgba(0,0,0,0.18);
 
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 
-  --primary-border: hsl(199 89% 40%);
-  --secondary-border: hsl(263 70% 42%);
-  --muted-border: hsl(217 32% 12%);
+  --primary-border: hsl(262 83% 50%);
+  --secondary-border: hsl(199 89% 40%);
+  --muted-border: hsl(220 14% 84%);
   --accent-border: hsl(38 92% 42%);
   --destructive-border: hsl(0 84% 52%);
-  --sidebar-primary-border: hsl(199 89% 40%);
-  --sidebar-accent-border: hsl(217 32% 12%);
+  --sidebar-primary-border: hsl(262 83% 50%);
+  --sidebar-accent-border: hsl(220 14% 84%);
 }
 
 @layer base {
@@ -135,13 +135,16 @@
   }
 }
 
-/* Smooth canvas rendering */
 canvas {
   display: block;
 }
 
-/* Touch-friendly targets */
 button {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Decorative blobs utility */
+.blob {
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
 }
