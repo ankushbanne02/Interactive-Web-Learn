@@ -16,6 +16,23 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 
+## Artifacts
+
+### `artifacts/electricity-exhibit` — Electricity Generation Science Park Exhibit
+Interactive educational website for children at a science park. Features:
+- Bilingual (English + Marathi) support via LanguageContext
+- Animated star-field landing page with language selector
+- Interactive 3D electricity generation model (React Three Fiber / Three.js)
+  - Hydro Dam, Turbine, Generator, Transformer, Transmission Lines, House
+  - Click-to-learn popups, rotate/zoom controls
+- Age group selection (5–10, 11–18, 18+)
+- Educational YouTube video player (unlocks next button on completion)
+- Spark City Adventure game embed (iframe)
+- Dynamic randomized quiz (8-question bank per age group, 5 shown per session)
+- Confetti reward/score screen
+- Floating help button
+- Stack: React + Vite, React Three Fiber, Framer Motion, TailwindCSS, canvas-confetti
+
 ## Structure
 
 ```text

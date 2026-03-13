@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Electricity Generation Exhibit"
+version = "1.0.0"
+id = "artifacts/electricity-exhibit"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+localPort = 21772
+name = "web"
+paths = ["/"]
+
+[services.development]
+run = "pnpm --filter @workspace/electricity-exhibit run dev"
+
+[services.env]
+PORT = "21772"
+BASE_PATH = "/"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/electricity-exhibit", "run", "build"]
+publicDir = "artifacts/electricity-exhibit/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"

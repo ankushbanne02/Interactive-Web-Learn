@@ -1,0 +1,397 @@
+Create a **high-quality interactive educational website for a Science Park Exhibit** titled:
+
+**“Electricity Generation – The Science Behind Power.”**
+
+The website should be designed **especially for children visiting a science park**, so the interface must be:
+
+• Colourful
+• Interactive
+• Large readable text
+• Friendly icons
+• Touch-screen friendly (for kiosks)
+
+Use a **modern tech stack**:
+
+React
+React Three Fiber (Three.js)
+TailwindCSS
+Framer Motion for animations
+
+The background theme should be **dark space-style like a science simulation**, but UI cards and buttons should be **bright, colorful, and playful**.
+
+---
+
+# LANGUAGE SYSTEM (IMPORTANT)
+
+The first page must ask the user to **select a language**.
+
+Supported languages:
+
+• English
+• Marathi
+
+When the user selects a language:
+
+• Store it in **global state / context / localStorage**
+• All pages after that must automatically appear in the **selected language**
+
+Examples:
+
+If English selected → entire site English
+If Marathi selected → entire site Marathi
+
+Translate all:
+
+• Titles
+• Buttons
+• Instructions
+• Quiz questions
+• Quiz explanations
+
+Example translations:
+
+English
+"Let's Explore"
+
+Marathi
+"चला एक्सप्लोर करूया"
+
+English
+"Choose Your Age Group"
+
+Marathi
+"तुमचा वयोगट निवडा"
+
+---
+
+# OVERALL USER FLOW
+
+Landing Page
+↓
+3D Electricity Generation Model
+↓
+Age Based Educational Videos
+↓
+Interactive Game
+↓
+Quiz (Age Based)
+↓
+Rewards Screen
+↓
+Restart Journey
+
+---
+
+# PAGE 1 – LANDING PAGE
+
+Design like a **science adventure welcome screen**.
+
+Background:
+• Animated stars / particles
+
+Center Content:
+
+Title
+"Welcome to Electricity Generation"
+
+Subtitle
+"Discover how electricity is generated and how science powers our world."
+
+Below Text
+"Get ready for an exciting learning adventure!"
+
+Buttons
+
+Primary Button
+"Let's Explore"
+
+Language Selector
+
+English | Marathi
+
+Large colorful buttons suitable for children.
+
+When language selected → store preference.
+
+Clicking **Let's Explore** → Page 2.
+
+---
+
+# PAGE 2 – INTERACTIVE 3D ELECTRICITY MODEL
+
+Use **Three.js / React Three Fiber**.
+
+Show a simple **interactive electricity generation flow model**.
+
+Objects in scene:
+
+Hydro Dam
+Water Turbine
+Electric Generator
+Transformer
+Transmission Lines
+House
+
+Each object should have **soft glowing animation**.
+
+User Controls:
+
+• Drag to rotate
+• Scroll to zoom
+• Click object to learn
+
+When clicking an object show a **floating information popup**.
+
+Example:
+
+Turbine
+
+English
+"Water spins the turbine. The turbine converts water energy into mechanical energy."
+
+Marathi
+"पाण्याचा प्रवाह टर्बाइन फिरवतो. यामुळे पाण्याची ऊर्जा यांत्रिक ऊर्जेत रूपांतरित होते."
+
+Bottom instruction bar:
+
+English
+"Click on components to learn more • Scroll to zoom • Drag to rotate"
+
+Marathi
+"घटकांवर क्लिक करा • झूम करण्यासाठी स्क्रोल करा • फिरवण्यासाठी ड्रॅग करा"
+
+Buttons
+
+Back
+Next: Videos
+
+---
+
+# PAGE 3 – AGE GROUP SELECTION
+
+Title
+
+English
+"Choose Your Age Group"
+
+Marathi
+"तुमचा वयोगट निवडा"
+
+Show **three colorful interactive cards**
+
+5 – 10 Years
+11 – 18 Years
+18+ Years
+
+Each card should have:
+
+• icon
+• gradient background
+• hover animation
+
+Store selected age group.
+
+---
+
+# PAGE 4 – EDUCATIONAL VIDEO PAGE
+
+Show **video player in the center**.
+
+Videos should depend on **age group**.
+
+Use educational YouTube videos about electricity generation.
+
+Example videos:
+
+5–10 Years
+https://www.youtube.com/watch?v=20Vb6hlLQSg
+
+11–18 Years
+https://www.youtube.com/watch?v=mc979OhitAg
+
+18+ Years
+https://www.youtube.com/watch?v=YQdN5JHj3kE
+
+UI Elements:
+
+• Video player
+• Back button
+• Next: Explore Game
+
+Important behavior:
+
+Next button becomes active **only after video finishes playing**.
+
+---
+
+# PAGE 5 – INTERACTIVE GAME
+
+Embed this game inside the website:
+
+https://spark-city-adventure.vercel.app/
+
+Use **iframe container**.
+
+Title above game:
+
+English
+"Spark City Adventure – Electricity Journey Game"
+
+Marathi
+"स्पार्क सिटी अ‍ॅडव्हेंचर – वीज प्रवास गेम"
+
+Below the game show button:
+
+Finish Game → Take Quiz
+
+---
+
+# PAGE 6 – QUIZ SYSTEM
+
+Quiz should be **dynamic and randomized**.
+
+Rules:
+
+• Only **5 questions per quiz**
+• Each time quiz should be **different**
+• Questions pulled from **question bank**
+• Multiple choice (4 options)
+
+Topics:
+
+Electricity generation
+Turbines
+Generators
+Energy conversion
+Power transmission
+
+Quiz must change **based on age group difficulty**.
+
+Example:
+
+5–10 → simple questions
+11–18 → moderate
+18+ → conceptual
+
+---
+
+# QUIZ INTERACTION BEHAVIOR
+
+When a user selects answer:
+
+If Correct
+
+• Option turns **green**
+• Message appears
+
+"Correct! Great job!"
+
+If Wrong
+
+• Selected option becomes **red**
+• Correct option highlighted **green**
+• Explanation appears
+
+Example Explanation
+
+English
+"Electricity is generated when turbines rotate generators converting mechanical energy into electrical energy."
+
+Marathi
+"टर्बाइन फिरल्यावर जनरेटर यांत्रिक ऊर्जेला विद्युत ऊर्जेत रूपांतरित करतो."
+
+User must click **Next Question**.
+
+Show progress:
+
+Question 3 / 5
+
+---
+
+# QUIZ COMPLETION
+
+After finishing 5 questions show **Reward Screen**.
+
+Title
+
+🎉 Congratulations!
+
+Message
+
+English
+"You successfully understood the idea of this exhibit and learned how electricity is generated."
+
+Marathi
+"तुम्ही या प्रदर्शनाची कल्पना समजून घेतली आणि वीज कशी तयार होते हे शिकलात."
+
+Show
+
+• stars animation
+• score
+• confetti
+
+Buttons
+
+Start Adventure Again
+
+Redirect to landing page.
+
+---
+
+# DESIGN REQUIREMENTS
+
+The UI must be designed for **children in science parks**.
+
+Use:
+
+• bright gradient cards
+• glowing buttons
+• large fonts
+• friendly icons
+• smooth animations
+
+Ensure the UI works well on **large touchscreen displays**.
+
+---
+
+# EXTRA FEATURES
+
+Add:
+
+• floating help button
+• animated transitions
+• hover animations
+• colorful UI elements
+• minimal loading times
+
+---
+
+# PROJECT STRUCTURE
+
+src
+
+components
+LandingPage
+ThreeDScene
+AgeSelection
+VideoPlayer
+GameEmbed
+QuizSystem
+RewardScreen
+LanguageContext
+
+pages
+
+Home
+Explore
+Videos
+Game
+Quiz
+
+---
+
+# IMPORTANT
+
+The experience must feel like a **fun science museum journey for kids**.
+
+Every time a visitor uses the exhibit, the **quiz questions must be different** to keep the learning experience fresh.
