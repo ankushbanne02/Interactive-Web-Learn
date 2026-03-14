@@ -219,8 +219,6 @@ function Landscape() {
       <Tree pos={[13.5,-0.65,-2]} />
       <Tree pos={[14.5,-0.65,2.5]} />
       <Tree pos={[12.0,-0.65,3]} />
-      <Tree pos={[2.5,-0.65,-3.2]} />
-      <Tree pos={[9.0,-0.65,-3]} />
     </group>
   );
 }
@@ -372,20 +370,20 @@ function Transformer({ onClick, active }: { onClick: () => void; active: boolean
 // ─── Transmission Tower ──────────────────────────────────────────────────────
 
 function Tower({ pos, active }: { pos: [number,number,number]; active: boolean }) {
-  const sc = active ? "#f1f5f9" : "#cbd5e1";
+  const sc = active ? "#4a5568" : "#1a202c";
   return (
     <group position={pos}>
       {[-0.4,0.4].map((x,i) => (
-        <Cyl3 key={i} pos={[x,-0.8,0]} args={[0.055,0.12,3.2,6]} color={sc} roughness={0.3} metalness={0.6} emissive={active?"#94a3b8":"#000"} ei={active?0.8:0} />
+        <Cyl3 key={i} pos={[x,-0.8,0]} args={[0.055,0.12,3.2,6]} color={sc} roughness={0.4} metalness={0.7} emissive={active?"#4a5568":"#000"} ei={active?0.6:0} />
       ))}
-      <Cyl3 pos={[0,0.6,0]} args={[0.05,0.05,2.1,6]} color={sc} roughness={0.3} metalness={0.6} />
-      <Box3 pos={[0,0.5,0]} size={[2.9,0.09,0.09]} color="#e2e8f0" roughness={0.3} metalness={0.5} emissive={active?"#94a3b8":"#000"} ei={active?0.5:0} />
-      <Box3 pos={[0,1.1,0]} size={[2.1,0.08,0.08]} color="#e2e8f0" roughness={0.3} metalness={0.5} />
-      <Box3 pos={[0,1.55,0]} size={[1.4,0.07,0.07]} color="#e2e8f0" roughness={0.3} metalness={0.5} />
+      <Cyl3 pos={[0,0.6,0]} args={[0.05,0.05,2.1,6]} color={sc} roughness={0.4} metalness={0.7} />
+      <Box3 pos={[0,0.5,0]} size={[2.9,0.09,0.09]} color={sc} roughness={0.4} metalness={0.6} emissive={active?"#4a5568":"#000"} ei={active?0.4:0} />
+      <Box3 pos={[0,1.1,0]} size={[2.1,0.08,0.08]} color={sc} roughness={0.4} metalness={0.6} />
+      <Box3 pos={[0,1.55,0]} size={[1.4,0.07,0.07]} color={sc} roughness={0.4} metalness={0.6} />
       {[-1,1].map((s,i) => (
         <mesh key={i} position={[s*0.38,-0.25,0]} rotation={[0,0,s*0.7]}>
           <boxGeometry args={[0.055,1.25,0.055]} />
-          <meshStandardMaterial color="#94a3b8" roughness={0.4} metalness={0.5} />
+          <meshStandardMaterial color={sc} roughness={0.4} metalness={0.6} />
         </mesh>
       ))}
       {[-1.2,0,1.2].map((x,i) => (
@@ -394,7 +392,7 @@ function Tower({ pos, active }: { pos: [number,number,number]; active: boolean }
           <meshStandardMaterial color="#fef08a" emissive="#fef08a" emissiveIntensity={active?2.5:0.8} roughness={0.1} />
         </mesh>
       ))}
-      <Box3 pos={[0,-2.15,0]} size={[1.2,0.3,0.5]} color="#94a3b8" roughness={0.7} />
+      <Box3 pos={[0,-2.15,0]} size={[1.2,0.3,0.5]} color="#374151" roughness={0.7} />
     </group>
   );
 }

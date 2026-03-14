@@ -59,11 +59,6 @@ export default function LandingPage() {
         style={{
           maxWidth: "640px",
           width: "100%",
-          background: "rgba(255,255,255,0.82)",
-          backdropFilter: "blur(16px)",
-          borderRadius: "24px",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)",
-          border: "1px solid rgba(255,255,255,0.9)",
         }}
       >
         {/* Lightning bolt */}
