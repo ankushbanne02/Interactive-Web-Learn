@@ -2,18 +2,6 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useApp } from "@/context/AppContext";
 
-const floatingIcons = [
-  { icon: "⚡", x: "7%",  y: "12%", size: "2.2rem", delay: 0 },
-  { icon: "💡", x: "87%", y: "10%", size: "2rem",   delay: 0.4 },
-  { icon: "🔋", x: "4%",  y: "70%", size: "1.8rem", delay: 0.8 },
-  { icon: "🌊", x: "90%", y: "65%", size: "2.1rem", delay: 0.2 },
-  { icon: "⚙️", x: "17%", y: "83%", size: "1.9rem", delay: 1.1 },
-  { icon: "🏭", x: "77%", y: "80%", size: "1.8rem", delay: 0.6 },
-  { icon: "🔌", x: "49%", y: "6%",  size: "1.7rem", delay: 1.4 },
-  { icon: "🌞", x: "21%", y: "20%", size: "2rem",   delay: 0.9 },
-  { icon: "🏠", x: "62%", y: "88%", size: "1.7rem", delay: 1.2 },
-  { icon: "⚡", x: "35%", y: "78%", size: "1.5rem", delay: 0.3 },
-];
 
 const steps = [
   { icon: "🔬", label: "3D Model",  color: "#7c3aed" },
@@ -37,18 +25,6 @@ export default function LandingPage() {
         background: "radial-gradient(ellipse 70% 55% at 50% 0%, rgba(124,58,237,0.07) 0%, transparent 70%)",
       }} />
 
-      {/* Floating emoji icons */}
-      {floatingIcons.map((p, i) => (
-        <motion.div
-          key={i}
-          className="absolute select-none pointer-events-none"
-          style={{ left: p.x, top: p.y, fontSize: p.size, opacity: 0.35 }}
-          animate={{ y: [0, -14, 0] }}
-          transition={{ duration: 3.5 + i * 0.35, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
-        >
-          {p.icon}
-        </motion.div>
-      ))}
 
       {/* Main card */}
       <motion.div
