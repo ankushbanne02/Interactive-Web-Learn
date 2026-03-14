@@ -1,0 +1,177 @@
+Improve the existing **3D Electricity Generation Model** in the website.
+
+Do NOT remove the current Three.js / React Three Fiber setup.
+Instead **upgrade the scene to look like an educational electricity generation diagram** similar to textbook illustrations.
+
+Use the following visual reference idea:
+
+Electricity Journey
+
+Hydro Dam → Water Turbine → Generator → Step-up Transformer → Transmission Tower → Distribution Transformer → House
+
+The scene should look like a **mini landscape showing how electricity travels from dam to home**.
+
+---
+
+# ADD DAM AND WATER SOURCE
+
+Add a **Hydroelectric Dam at the beginning of the scene**.
+
+Elements to include:
+
+• Large concrete dam wall
+• Water reservoir behind the dam
+• Flowing water animation
+• Water channel going to turbine
+
+Water should appear **blue and slightly animated** so kids can visually understand energy flow.
+
+---
+
+# IMPROVE TURBINE
+
+Current turbine is a simple cylinder.
+
+Replace it with a more recognizable **water turbine structure**:
+
+• Round turbine housing
+• Rotating turbine blades
+• Water flowing through the turbine
+
+Add subtle rotation animation.
+
+---
+
+# GENERATOR BUILDING
+
+Instead of a simple block:
+
+Create a **generator building**.
+
+Visual style:
+
+• Industrial building
+• Small lightning bolt icon
+• Generator cylinder inside
+
+---
+
+# ADD STEP-UP TRANSFORMER STATION
+
+Add a transformer station between generator and transmission tower.
+
+Include:
+
+• Transformer box
+• Small electric poles
+• cables connecting to tower
+
+---
+
+# IMPROVE TRANSMISSION TOWER
+
+Current towers look too simple.
+
+Replace with a **steel electricity tower structure**.
+
+Include:
+
+• triangular metal frame
+• cross beams
+• power cables
+
+Add animated glowing lines representing electricity flow.
+
+---
+
+# ADD DISTRIBUTION TRANSFORMER
+
+Before the house, add a **distribution transformer**.
+
+Include:
+
+• small transformer box on pole
+• wires going to the house
+
+---
+
+# IMPROVE HOUSE
+
+Make the house look friendly and clear for kids:
+
+• small colorful house
+• glowing window lights
+
+When electricity reaches the house, animate a **light turning on**.
+
+---
+
+# ADD ELECTRICITY FLOW VISUALIZATION
+
+To make the model educational:
+
+Add animated glowing energy lines moving through the system:
+
+Dam → Turbine → Generator → Transformer → Towers → House
+
+Use soft yellow glowing lines.
+
+---
+
+# IMPROVE SCENE SCALE
+
+Currently objects are too small.
+
+Adjust camera and object scale so the entire electricity system fills the screen.
+
+Camera should show the full system clearly.
+
+---
+
+# ADD LANDSCAPE
+
+Create a simple ground environment:
+
+• green terrain
+• small hills
+• sky gradient
+
+This should look like a **mini educational landscape**, not floating objects.
+
+---
+
+# OBJECT LABELS
+
+Add labels below each object:
+
+Hydro Dam
+Water Turbine
+Generator
+Step-up Transformer
+Transmission Tower
+Distribution Transformer
+Home
+
+Labels should be readable and interactive.
+
+Clicking a component should show a **small popup explanation**.
+
+---
+
+# KEEP THE UI SAME
+
+Do NOT modify the page layout.
+
+Only improve the **3D model visual quality**.
+
+Navigation buttons and instructions should remain unchanged.
+
+---
+
+# PERFORMANCE
+
+Keep model lightweight so it runs smoothly in browsers.
+
+Avoid extremely high polygon models.
+
+Use simple but recognizable shapes.
