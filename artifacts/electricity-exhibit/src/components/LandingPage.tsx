@@ -3,6 +3,18 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useApp } from "@/context/AppContext";
 
 
+// Positioned only in far corners/edges — never near the center text block
+const floatingIcons = [
+  { icon: "⚡", x: "3%",  y: "6%",  size: "1.9rem", delay: 0 },
+  { icon: "💡", x: "91%", y: "5%",  size: "1.7rem", delay: 0.4 },
+  { icon: "🔋", x: "2%",  y: "48%", size: "1.6rem", delay: 0.8 },
+  { icon: "🌊", x: "94%", y: "44%", size: "1.8rem", delay: 0.2 },
+  { icon: "⚙️", x: "4%",  y: "88%", size: "1.7rem", delay: 1.1 },
+  { icon: "🏭", x: "90%", y: "86%", size: "1.6rem", delay: 0.6 },
+  { icon: "🌞", x: "14%", y: "3%",  size: "1.8rem", delay: 0.9 },
+  { icon: "🏠", x: "80%", y: "3%",  size: "1.6rem", delay: 1.3 },
+];
+
 const steps = [
   { icon: "🔬", label: "3D Model",  color: "#7c3aed" },
   { icon: "🎬", label: "Video",     color: "#2563eb" },
@@ -25,6 +37,18 @@ export default function LandingPage() {
         background: "radial-gradient(ellipse 70% 55% at 50% 0%, rgba(124,58,237,0.07) 0%, transparent 70%)",
       }} />
 
+      {/* Floating icons — pinned to corners/edges only */}
+      {floatingIcons.map((p, i) => (
+        <motion.div
+          key={i}
+          className="absolute select-none pointer-events-none"
+          style={{ left: p.x, top: p.y, fontSize: p.size, opacity: 0.3 }}
+          animate={{ y: [0, -12, 0] }}
+          transition={{ duration: 3.5 + i * 0.35, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
+        >
+          {p.icon}
+        </motion.div>
+      ))}
 
       {/* Main card */}
       <motion.div
@@ -37,6 +61,15 @@ export default function LandingPage() {
           width: "100%",
         }}
       >
+        {/* Big lightning bolt — clear gap above title */}
+        <motion.div
+          animate={{ scale: [1, 1.12, 1] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+          style={{ fontSize: "4rem", lineHeight: 1, marginBottom: "1.5rem" }}
+        >
+          ⚡
+        </motion.div>
+
         {/* Title */}
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
