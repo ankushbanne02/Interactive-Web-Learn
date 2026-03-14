@@ -77,6 +77,12 @@ const translations: Record<string, Record<Language, string>> = {
   "reward.good": { en: "👍 Good effort! Keep exploring!", mr: "👍 चांगला प्रयत्न! एक्सप्लोर करत राहा!" },
   "reward.keep": { en: "🌱 Keep learning — every question makes you smarter!", mr: "🌱 शिकत राहा — प्रत्येक प्रश्न तुम्हाला हुशार बनवतो!" },
   "reward.restart": { en: "Start Again", mr: "पुन्हा सुरू करा" },
+  // Landing steps
+  "step.model":  { en: "3D Model", mr: "3D मॉडेल" },
+  "step.video":  { en: "Video",    mr: "व्हिडिओ" },
+  "step.game":   { en: "Game",     mr: "खेळ" },
+  "step.quiz":   { en: "Quiz",     mr: "प्रश्नमंजुषा" },
+  "step.reward": { en: "Reward",   mr: "पुरस्कार" },
   // Help
   "help.title": { en: "How to use", mr: "कसे वापरावे" },
   "help.tip1": { en: "Click on any 3D object to read about it", mr: "त्याबद्दल वाचण्यासाठी कोणत्याही 3D ऑब्जेक्टवर क्लिक करा" },

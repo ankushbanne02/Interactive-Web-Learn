@@ -9,12 +9,11 @@ const videoMapEn: Record<AgeGroup, string> = {
   "18+":   "YQdN5JHj3kE",
 };
 
-// Marathi video — same educational video shown for all age groups
-// Update these IDs with age-specific Marathi videos when available
+// Marathi energy videos — electricity generation in Marathi
 const videoMapMr: Record<AgeGroup, string> = {
-  "5-10":  "FKKAz_wQGFE",
-  "11-18": "FKKAz_wQGFE",
-  "18+":   "FKKAz_wQGFE",
+  "5-10":  "Rnj0K9DmNJg",
+  "11-18": "Rnj0K9DmNJg",
+  "18+":   "FtyVMH_kjbA",
 };
 
 const ageBadge: Record<AgeGroup, { label: string; color: string }> = {

@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useApp } from "@/context/AppContext";
 
-
-// Positioned only in far corners/edges — never near the center text block
 const floatingIcons = [
   { icon: "⚡", x: "3%",  y: "6%",  size: "1.9rem", delay: 0 },
   { icon: "💡", x: "91%", y: "5%",  size: "1.7rem", delay: 0.4 },
@@ -15,12 +13,12 @@ const floatingIcons = [
   { icon: "🏠", x: "80%", y: "3%",  size: "1.6rem", delay: 1.3 },
 ];
 
-const steps = [
-  { icon: "🔬", label: "3D Model",  color: "#7c3aed" },
-  { icon: "🎬", label: "Video",     color: "#2563eb" },
-  { icon: "🎮", label: "Game",      color: "#0891b2" },
-  { icon: "🧠", label: "Quiz",      color: "#059669" },
-  { icon: "🏆", label: "Reward",    color: "#d97706" },
+const stepDefs = [
+  { icon: "🔬", key: "step.model",  color: "#7c3aed" },
+  { icon: "🎬", key: "step.video",  color: "#2563eb" },
+  { icon: "🎮", key: "step.game",   color: "#0891b2" },
+  { icon: "🧠", key: "step.quiz",   color: "#059669" },
+  { icon: "🏆", key: "step.reward", color: "#d97706" },
 ];
 
 export default function LandingPage() {
@@ -30,11 +28,15 @@ export default function LandingPage() {
   return (
     <div
       className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden"
-      style={{ background: "linear-gradient(160deg, #e0f2fe 0%, #f0fdf4 40%, #fefce8 100%)" }}
+      style={{ background: "linear-gradient(160deg, #dbeafe 0%, #ede9fe 45%, #fce7f3 100%)" }}
     >
-      {/* Top gradient decoration */}
+      {/* Radial glow at top */}
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: "radial-gradient(ellipse 70% 55% at 50% 0%, rgba(124,58,237,0.07) 0%, transparent 70%)",
+        background: "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,58,237,0.12) 0%, transparent 70%)",
+      }} />
+      {/* Subtle bottom glow */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: "radial-gradient(ellipse 60% 40% at 50% 100%, rgba(37,99,235,0.07) 0%, transparent 70%)",
       }} />
 
       {/* Floating icons — pinned to corners/edges only */}
@@ -197,7 +199,7 @@ export default function LandingPage() {
           transition={{ delay: 0.75 }}
           style={{ display: "flex", alignItems: "center", gap: 0, justifyContent: "center" }}
         >
-          {steps.map((s, i) => (
+          {stepDefs.map((s, i) => (
             <div key={i} style={{ display: "flex", alignItems: "center" }}>
               <div style={{
                 display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
@@ -212,10 +214,10 @@ export default function LandingPage() {
                   {s.icon}
                 </div>
                 <span style={{ fontSize: "0.65rem", color: "#94a3b8", fontWeight: 600, whiteSpace: "nowrap" }}>
-                  {s.label}
+                  {t(s.key)}
                 </span>
               </div>
-              {i < steps.length - 1 && (
+              {i < stepDefs.length - 1 && (
                 <div style={{
                   width: "20px", height: "2px", marginBottom: "14px",
                   background: "linear-gradient(90deg, #e2e8f0, #c7d2fe)",
