@@ -52,6 +52,13 @@ const translations: Record<string, Record<Language, string>> = {
   "age.group3": { en: "Ages 18+", mr: "वय १८+" },
   "age.group3.desc": { en: "Advanced concepts and real-world data", mr: "प्रगत संकल्पना आणि वास्तविक जगातील डेटा" },
   "age.back": { en: "Back", mr: "मागे" },
+  "age.select":  { en: "Select →", mr: "निवडा →" },
+  "age.badge1":  { en: "Junior Explorer",  mr: "नवोदित अन्वेषक" },
+  "age.badge2":  { en: "Science Explorer", mr: "विज्ञान अन्वेषक" },
+  "age.badge3":  { en: "Expert Learner",   mr: "तज्ञ शिकाऊ" },
+  "age.desc2.1": { en: "🎨 Stories • Games • Fun",       mr: "🎨 कथा • खेळ • मजा" },
+  "age.desc2.2": { en: "⚗️ Science • Experiments • Data", mr: "⚗️ विज्ञान • प्रयोग • डेटा" },
+  "age.desc2.3": { en: "📊 Advanced • Real-World • Data", mr: "📊 प्रगत • वास्तव • डेटा" },
   // Video
   "video.title": { en: "Educational Video", mr: "शैक्षणिक व्हिडिओ" },
   "video.subtitle": { en: "Watch and learn how electricity reaches your home", mr: "वीज तुमच्या घरापर्यंत कशी पोहोचते ते पहा आणि शिका" },
@@ -84,7 +91,7 @@ const translations: Record<string, Record<Language, string>> = {
   "step.quiz":   { en: "Quiz",     mr: "प्रश्नमंजुषा" },
   "step.reward": { en: "Reward",   mr: "पुरस्कार" },
   // Scene UI
-  "scene.stepLabel":   { en: "Step",    mr: "टप्पा" },
+  "scene.stepLabel":   { en: "Step",    mr: "Step" },
   "scene.clickHint":   { en: "👆 Click on any component to learn more", mr: "👆 घटकांवर क्लिक करून अधिक जाणून घ्या" },
   "scene.dragHint":    { en: "🖱️ Drag to rotate  •  Scroll to zoom",    mr: "🖱️ फिरवण्यासाठी ड्रॅग करा  •  झूम करण्यासाठी स्क्रोल करा" },
   "obj.distTr.name":   { en: "Dist. Transformer", mr: "वितरण ट्रान्सफॉर्मर" },

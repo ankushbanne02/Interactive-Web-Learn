@@ -8,8 +8,8 @@ const groups: {
   color: string;
   gradient: string;
   bgGrad: string;
-  desc2: string;
-  badge: string;
+  badgeKey: string;
+  desc2Key: string;
 }[] = [
   {
     id: "5-10",
@@ -17,8 +17,8 @@ const groups: {
     color: "#ec4899",
     gradient: "linear-gradient(135deg, #ec4899 0%, #f43f5e 100%)",
     bgGrad: "linear-gradient(135deg, #fdf2f8 0%, #fff1f2 100%)",
-    desc2: "🎨 Stories • Games • Fun",
-    badge: "Junior Explorer",
+    badgeKey: "age.badge1",
+    desc2Key: "age.desc2.1",
   },
   {
     id: "11-18",
@@ -26,8 +26,8 @@ const groups: {
     color: "#7c3aed",
     gradient: "linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)",
     bgGrad: "linear-gradient(135deg, #f5f3ff 0%, #eff6ff 100%)",
-    desc2: "⚗️ Science • Experiments • Data",
-    badge: "Science Explorer",
+    badgeKey: "age.badge2",
+    desc2Key: "age.desc2.2",
   },
   {
     id: "18+",
@@ -35,8 +35,8 @@ const groups: {
     color: "#059669",
     gradient: "linear-gradient(135deg, #059669 0%, #0891b2 100%)",
     bgGrad: "linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%)",
-    desc2: "📊 Advanced • Real-World • Data",
-    badge: "Expert Learner",
+    badgeKey: "age.badge3",
+    desc2Key: "age.desc2.3",
   },
 ];
 
@@ -150,7 +150,7 @@ export default function AgeSelection() {
                 letterSpacing: "0.05em",
                 textTransform: "uppercase",
               }}>
-                {g.badge}
+                {t(g.badgeKey)}
               </div>
 
               {/* Icon circle */}
@@ -184,7 +184,7 @@ export default function AgeSelection() {
                   color: g.color, fontSize: "0.75rem",
                   fontWeight: 600, margin: 0,
                 }}>
-                  {g.desc2}
+                  {t(g.desc2Key)}
                 </p>
               </div>
 
@@ -201,7 +201,7 @@ export default function AgeSelection() {
                   letterSpacing: "0.01em",
                 }}
               >
-                Select →
+                {t("age.select")}
               </motion.div>
             </motion.button>
           ))}
