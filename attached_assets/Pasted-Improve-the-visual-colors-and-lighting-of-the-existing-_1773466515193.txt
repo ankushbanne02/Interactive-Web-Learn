@@ -1,0 +1,105 @@
+Improve the **visual colors and lighting of the existing 3D Electricity Generation Model**.
+
+Do NOT change the structure of the scene or the placement of objects.
+Only improve **colors, materials, lighting, and visual friendliness** so the model looks more engaging for children in a science park exhibit.
+
+The scene should look **bright, colorful, and educational**, not dark.
+
+---
+
+# COLOR IMPROVEMENTS
+
+Update object colors to be more vibrant.
+
+Hydro Dam
+• Light concrete gray dam wall
+• Bright blue water reservoir
+• Animated flowing water with lighter blue highlights
+
+Water Turbine
+• Metallic silver turbine blades
+• Blue turbine housing
+
+Generator Building
+• Orange or yellow building
+• Add glowing lightning bolt symbol
+
+Transformer
+• Yellow transformer box with black details
+
+Transmission Towers
+• Light gray metal towers
+• Power lines slightly glowing yellow to represent electricity
+
+Distribution Transformer
+• Light yellow box on a brown pole
+
+House
+• Bright red roof
+• Light cream or pastel colored walls
+• Warm yellow glowing windows
+
+---
+
+# ENVIRONMENT COLORS
+
+Ground / Terrain
+• Bright green grass
+
+Trees
+• Fresh green leaves
+• Brown trunks
+
+Sky
+• Soft sky blue gradient background
+
+This will make the scene feel like a **friendly educational landscape**.
+
+---
+
+# ELECTRICITY FLOW EFFECT
+
+Improve the electricity visualization.
+
+Add glowing animated lines showing electricity moving from:
+
+Dam → Turbine → Generator → Transformer → Transmission Towers → House
+
+Color for electricity lines:
+Soft glowing yellow or light blue.
+
+---
+
+# LIGHTING IMPROVEMENTS
+
+Add brighter lighting so objects are clearly visible.
+
+Use:
+
+• Soft daylight lighting
+• Ambient light for overall brightness
+• Slight directional light to create gentle shadows
+
+Avoid dark shadows that hide objects.
+
+---
+
+# MATERIALS
+
+Use slightly glossy materials instead of flat colors so objects look more polished.
+
+Example:
+
+• water slightly reflective
+• metal towers slightly shiny
+• house windows glowing
+
+---
+
+# GOAL
+
+The final scene should look like:
+
+A **bright, colorful 3D educational electricity journey diagram** suitable for children visiting a science park.
+
+It should feel **fun, friendly, and visually engaging**.
