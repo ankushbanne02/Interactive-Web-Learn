@@ -7,44 +7,57 @@ export default function GameEmbed() {
   const { setPage } = useApp();
 
   return (
-    <div className="relative h-screen flex flex-col bg-white">
-      {/* Header bar */}
+    <div className="w-full h-full flex flex-col overflow-hidden" style={{ background: "#0f172a" }}>
+      {/* Header */}
       <div
-        className="flex items-center justify-between px-6 py-3 border-b border-gray-100 shadow-sm"
-        style={{ background: "linear-gradient(90deg, #f0f9ff, #fef3c7)" }}
+        className="shrink-0 flex items-center justify-between px-8"
+        style={{ height: "64px", borderBottom: "1px solid rgba(255,255,255,0.08)", background: "rgba(15,23,42,0.95)" }}
       >
-        <button
-          onClick={() => setPage("video")}
-          className="px-5 py-2.5 bg-white hover:bg-gray-50 text-gray-600 rounded-xl font-semibold border border-gray-200 shadow-sm transition-all hover:shadow-md flex items-center gap-2"
-        >
-          ← {t("game.back")}
-        </button>
-
-        <div className="flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 bg-white/80 rounded-full px-4 py-1 border border-yellow-200 mb-0.5">
-            <span className="text-yellow-600 font-bold text-xs uppercase tracking-wider">Step 4</span>
-          </div>
-          <h1 className="text-base md:text-lg font-extrabold text-gray-800 text-center">
-            ⚡ {t("game.title")}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <span style={{
+            background: "rgba(245,158,11,0.2)", color: "#fbbf24",
+            fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
+            padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase"
+          }}>
+            Step 4 / 5
+          </span>
+          <h1 style={{ color: "#f1f5f9", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+            🎮 {t("game.title")}
           </h1>
         </div>
-
-        <motion.button
-          whileHover={{ scale: 1.05, y: -1 }}
-          whileTap={{ scale: 0.97 }}
-          onClick={() => setPage("quiz")}
-          className="px-6 py-2.5 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-xl font-bold shadow-lg shadow-purple-200 transition-all text-sm"
-        >
-          {t("game.next")}
-        </motion.button>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <button
+            onClick={() => setPage("video")}
+            style={{
+              padding: "0.5rem 1.25rem", borderRadius: "8px", fontSize: "0.9rem",
+              fontWeight: 600, background: "rgba(255,255,255,0.07)", color: "#94a3b8",
+              border: "1px solid rgba(255,255,255,0.1)", cursor: "pointer"
+            }}
+          >
+            ← {t("game.back")}
+          </button>
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setPage("quiz")}
+            style={{
+              padding: "0.5rem 1.5rem", borderRadius: "8px", fontSize: "0.9rem",
+              fontWeight: 700, background: "linear-gradient(135deg, #7c3aed, #2563eb)",
+              color: "#ffffff", border: "none", cursor: "pointer",
+              boxShadow: "0 4px 14px rgba(124,58,237,0.4)"
+            }}
+          >
+            {t("game.next")}
+          </motion.button>
+        </div>
       </div>
 
       {/* Game iframe */}
-      <div className="flex-1 relative bg-gray-50">
+      <div className="flex-1 min-h-0">
         <iframe
           src="https://spark-city-adventure.vercel.app/"
-          className="w-full h-full border-0"
-          title="Spark City Adventure Game"
+          style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+          title="Spark City Adventure"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; fullscreen"
         />
       </div>

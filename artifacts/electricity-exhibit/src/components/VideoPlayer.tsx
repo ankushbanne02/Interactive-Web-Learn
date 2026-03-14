@@ -1,7 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useApp, AgeGroup } from "@/context/AppContext";
+import { motion } from "framer-motion";
 
 const videoMap: Record<AgeGroup, string> = {
   "5-10": "20Vb6hlLQSg",
@@ -10,127 +9,99 @@ const videoMap: Record<AgeGroup, string> = {
 };
 
 const ageBadge: Record<AgeGroup, { label: string; color: string }> = {
-  "5-10": { label: "Ages 5–10 🧒", color: "from-pink-500 to-rose-400" },
-  "11-18": { label: "Ages 11–18 🧑", color: "from-violet-500 to-purple-400" },
-  "18+": { label: "Ages 18+ 👩‍🔬", color: "from-emerald-500 to-cyan-400" },
+  "5-10": { label: "Ages 5–10 🧒", color: "#ec4899" },
+  "11-18": { label: "Ages 11–18 🧑", color: "#7c3aed" },
+  "18+": { label: "Ages 18+ 👩‍🔬", color: "#10b981" },
 };
 
 export default function VideoPlayer() {
   const { t } = useLanguage();
   const { setPage, ageGroup } = useApp();
-  const [videoEnded, setVideoEnded] = useState(false);
 
   const videoId = videoMap[ageGroup ?? "5-10"];
   const badge = ageBadge[ageGroup ?? "5-10"];
-  const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0&enablejsapi=1`;
-
-  useEffect(() => {
-    const handler = (event: MessageEvent) => {
-      if (typeof event.data === "string") {
-        try {
-          const data = JSON.parse(event.data);
-          if (data.event === "onStateChange" && data.info === 0) {
-            setVideoEnded(true);
-          }
-        } catch { }
-      }
-    };
-    window.addEventListener("message", handler);
-    return () => window.removeEventListener("message", handler);
-  }, []);
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0`;
 
   return (
     <div
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 py-12"
-      style={{ background: "linear-gradient(135deg, #f0f9ff 0%, #fef3c7 50%, #fce7f3 100%)" }}
+      className="w-full h-full flex flex-col overflow-hidden"
+      style={{ background: "#0f172a" }}
     >
-      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-200 opacity-40 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3" />
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-orange-200 opacity-40 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
-
-      <div className="relative z-10 w-full max-w-4xl">
-        {/* Header */}
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur rounded-full px-5 py-2 shadow-sm border border-blue-100 mb-3">
-            <span className="text-blue-500 font-bold text-sm uppercase tracking-wider">Step 3</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-2">
-            {t("video.title")} 🎬
+      {/* Header */}
+      <div
+        className="shrink-0 flex items-center justify-between px-8"
+        style={{ height: "64px", borderBottom: "1px solid rgba(255,255,255,0.08)", background: "rgba(15,23,42,0.95)" }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <span style={{
+            background: "rgba(124,58,237,0.25)", color: "#a78bfa",
+            fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
+            padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase"
+          }}>
+            Step 3 / 5
+          </span>
+          <h1 style={{ color: "#f1f5f9", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+            🎬 {t("video.title")}
           </h1>
-          <p className="text-xl text-gray-500 mb-3">{t("video.subtitle")}</p>
-          <span className={`inline-block px-5 py-2 rounded-full bg-gradient-to-r ${badge.color} text-white font-bold text-sm shadow-md`}>
+          <span style={{
+            padding: "0.2rem 0.75rem", borderRadius: "20px",
+            background: `${badge.color}22`, color: badge.color,
+            fontSize: "0.78rem", fontWeight: 600, border: `1px solid ${badge.color}40`,
+          }}>
             {badge.label}
           </span>
-        </motion.div>
-
-        {/* Video card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
-          className="bg-white rounded-3xl shadow-2xl shadow-blue-100 overflow-hidden border border-blue-100"
-          style={{ aspectRatio: "16/9" }}
-        >
-          <iframe
-            src={embedUrl}
-            className="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="Educational Video"
-          />
-        </motion.div>
-
-        {!videoEnded && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-4 text-center flex items-center justify-center gap-2 bg-amber-50 border border-amber-200 rounded-2xl px-6 py-3"
-          >
-            <span className="text-2xl">⏰</span>
-            <p className="text-amber-700 text-lg font-semibold">{t("video.nextHint")}</p>
-          </motion.div>
-        )}
-
-        {videoEnded && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="mt-4 text-center flex items-center justify-center gap-2 bg-green-50 border border-green-200 rounded-2xl px-6 py-3"
-          >
-            <span className="text-2xl">✅</span>
-            <p className="text-green-700 text-lg font-semibold">Video complete! Ready to continue!</p>
-          </motion.div>
-        )}
-
-        <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-between items-center">
+        </div>
+        <div style={{ display: "flex", gap: "8px" }}>
           <button
             onClick={() => setPage("age")}
-            className="px-8 py-4 bg-white hover:bg-gray-50 text-gray-600 rounded-xl text-lg font-semibold border border-gray-200 shadow-sm transition-all hover:shadow-md"
+            style={{
+              padding: "0.5rem 1.25rem", borderRadius: "8px", fontSize: "0.9rem",
+              fontWeight: 600, background: "rgba(255,255,255,0.07)", color: "#94a3b8",
+              border: "1px solid rgba(255,255,255,0.1)", cursor: "pointer"
+            }}
           >
             ← {t("video.back")}
           </button>
-
           <motion.button
-            whileHover={videoEnded ? { scale: 1.05, y: -2 } : {}}
-            whileTap={videoEnded ? { scale: 0.97 } : {}}
-            onClick={() => videoEnded && setPage("game")}
-            className={`px-10 py-4 rounded-xl text-xl font-bold transition-all shadow-lg ${
-              videoEnded
-                ? "bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-emerald-200 hover:shadow-xl cursor-pointer"
-                : "bg-gray-100 text-gray-400 cursor-not-allowed shadow-none"
-            }`}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            onClick={() => setPage("game")}
+            style={{
+              padding: "0.5rem 1.5rem", borderRadius: "8px", fontSize: "0.9rem",
+              fontWeight: 700, background: "linear-gradient(135deg, #7c3aed, #2563eb)",
+              color: "#ffffff", border: "none", cursor: "pointer",
+              boxShadow: "0 4px 14px rgba(124,58,237,0.4)"
+            }}
           >
             {t("video.next")} →
           </motion.button>
         </div>
+      </div>
 
-        <div className="mt-3 text-center">
-          <button
-            onClick={() => setVideoEnded(true)}
-            className="text-gray-400 hover:text-gray-600 text-sm underline transition-colors"
-          >
-            (Skip video for demo)
-          </button>
+      {/* Subtitle */}
+      <div className="shrink-0 px-8 py-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+        <p style={{ color: "#64748b", fontSize: "0.88rem", margin: 0 }}>{t("video.subtitle")}</p>
+      </div>
+
+      {/* Video — fills remaining space */}
+      <div className="flex-1 min-h-0 p-6">
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: "12px",
+            overflow: "hidden",
+            border: "1px solid rgba(255,255,255,0.08)",
+            background: "#000",
+          }}
+        >
+          <iframe
+            src={embedUrl}
+            style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="Educational Video"
+          />
         </div>
       </div>
     </div>

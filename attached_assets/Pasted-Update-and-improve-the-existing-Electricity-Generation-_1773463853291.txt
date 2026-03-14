@@ -1,0 +1,292 @@
+Update and improve the existing **Electricity Generation Science Exhibit website**.
+
+Do NOT rebuild the project from scratch.
+Instead **fix layout, responsiveness, and interaction issues** and improve the UI.
+
+IMPORTANT DESIGN REQUIREMENT:
+
+The website should look like it was **carefully designed by a professional human designer**, not generated automatically by an AI tool.
+
+Avoid common AI-generated design patterns such as:
+
+• oversized rounded cards everywhere
+• excessive gradients
+• inconsistent spacing
+• random icon placement
+• unbalanced layouts
+
+Use **clean, balanced, professional layouts** similar to modern museum or science exhibit websites.
+
+Design should feel:
+
+• polished
+• intentional
+• consistent
+• well aligned
+
+Spacing, typography, and colors must be **visually balanced and structured**.
+
+---
+
+# 1. FIX LANDING PAGE DESIGN
+
+Current issue:
+The landing page card is too large and does not fit the screen.
+
+Remove the large white container card.
+
+Design the landing page similar to the **Solar System welcome page style**:
+
+Layout:
+
+Full screen animated background (space or subtle particles).
+
+Centered content:
+
+Rocket icon
+
+Welcome to Electricity Generation
+
+Discover how electricity is generated and how science powers our world.
+
+Let's Explore Button
+
+Language selector below:
+
+English | Marathi
+
+Keep the **same colors and typography**, but adjust layout so the page looks **clean and professionally designed**.
+
+Everything must fit inside **100vh with no scrolling**.
+
+---
+
+# 2. FIX LANGUAGE SWITCHING
+
+Problem:
+When Marathi is selected the page does not immediately update.
+
+Fix this behavior.
+
+Requirements:
+
+Use **React Context or global state** for language.
+
+When language is changed:
+
+• All visible text updates instantly
+• No page reload required
+
+This must work for:
+
+Landing page
+3D model instructions
+Video page
+Quiz page
+Reward page
+
+---
+
+# 3. IMPROVE 3D MODEL SCENE
+
+Current problems:
+
+• Model is too small
+• Scene feels empty
+• Not engaging
+
+Improve the scene to look like a **mini electricity generation environment**.
+
+Include:
+
+Hydroelectric dam
+Water reservoir
+Animated water flow
+Water turbine
+Generator building
+Transformer
+Transmission tower
+Power lines
+House receiving electricity
+
+Style:
+
+Educational cartoon style similar to science textbooks.
+
+Make objects **large enough to clearly see on screen**.
+
+Add simple animations:
+
+Water flowing from dam to turbine
+Electric lines glowing slightly
+
+Camera must be positioned so the **whole system is clearly visible**.
+
+---
+
+# 4. REMOVE SCROLLING FROM MODEL PAGE
+
+Currently users must scroll to see the Next button.
+
+Fix the layout so the page fits **within one screen**.
+
+Structure:
+
+Top
+STEP 1 – Interactive Electricity Model
+
+Center
+3D scene
+
+Below
+Instruction bar
+
+Bottom
+Back | Next buttons
+
+Buttons must always be visible.
+
+No vertical scrolling.
+
+---
+
+# 5. VIDEO PAGE LAYOUT FIX
+
+Currently the video page does not fit the screen.
+
+Improve layout:
+
+Top
+STEP 3 – Educational Video
+
+Center
+Large video player
+
+Bottom
+Back | Next: Explore Game
+
+Video must fit on screen without scrolling.
+
+Next button should be **available immediately**.
+
+---
+
+# 6. QUIZ OPTION COLOR CONSISTENCY
+
+Currently options A, B, C, D have different colors.
+
+Fix this.
+
+Default state:
+
+White background
+Neutral border
+
+Selected state:
+
+Blue highlight
+
+Correct answer:
+
+Green
+
+Wrong answer:
+
+Red
+
+All options must look **consistent and balanced**.
+
+---
+
+# 7. QUIZ PAGE SCREEN FIT
+
+Ensure quiz page fits completely on screen.
+
+Layout:
+
+Top
+Step indicator
+Progress bar
+Question number
+
+Center
+Question card
+
+Below
+Answer options
+
+Bottom
+Next Question button
+
+No scrolling allowed.
+
+---
+
+# 8. REWARD PAGE SCREEN FIT
+
+Current page elements are not balanced.
+
+Improve layout:
+
+Top
+Trophy icon
+
+Center
+Congratulations message
+
+Below
+Score card
+
+Below
+Star rating
+
+Bottom
+Restart Adventure button
+
+Everything must fit inside **100vh**.
+
+---
+
+# 9. MARATHI FONT VISIBILITY FIX
+
+Marathi text currently looks unclear.
+
+Use proper Devanagari fonts such as:
+
+Noto Sans Devanagari
+Mukta
+Hind
+
+Increase font weight to **500 or 600**.
+
+Ensure Marathi text is **clear and readable on all pages**.
+
+---
+
+# 10. GLOBAL SCREEN RULE
+
+Every page must follow:
+
+height: 100vh
+
+No vertical scrolling.
+
+The site will run on **1920×1080 science park touchscreen displays**, so layouts must be optimized for that resolution.
+
+---
+
+# 11. PROFESSIONAL UI POLISH
+
+Improve visual quality by adding:
+
+• smooth page transitions
+• subtle hover animations
+• balanced spacing between elements
+• consistent button styles
+• clean typography hierarchy
+
+Avoid making the interface look **AI-generated**.
+
+Instead it should feel like a **professionally crafted interactive museum exhibit website for children**.
+
+The final experience should feel **immersive, polished, and human-designed**.

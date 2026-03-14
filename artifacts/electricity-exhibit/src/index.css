@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -28,19 +29,12 @@
 
   --color-muted: hsl(var(--muted));
   --color-muted-foreground: hsl(var(--muted-foreground));
-  --color-muted-border: var(--muted-border);
 
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
-  --color-accent-border: var(--accent-border);
 
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
-  --color-destructive-border: var(--destructive-border);
-
-  --font-sans: var(--app-font-sans);
-  --font-serif: var(--app-font-serif);
-  --font-mono: var(--app-font-mono);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -49,102 +43,61 @@
 }
 
 :root {
-  --button-outline: rgba(0,0,0, .10);
-  --badge-outline: rgba(0,0,0, .05);
-  --opaque-button-border-intensity: -8;
-  --elevate-1: rgba(0,0,0, .03);
-  --elevate-2: rgba(0,0,0, .08);
-
   --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
-  --border: 220 14% 90%;
-  --input: 220 14% 90%;
-  --ring: 262 83% 58%;
-
+  --foreground: 222.2 84% 4.9%;
   --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
-  --card-border: 220 14% 90%;
-
+  --card-foreground: 222.2 84% 4.9%;
+  --card-border: 214.3 31.8% 91.4%;
   --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
-  --popover-border: 220 14% 90%;
-
-  --primary: 262 83% 58%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 199 89% 48%;
-  --secondary-foreground: 0 0% 100%;
-
-  --muted: 220 14% 96%;
-  --muted-foreground: 220 9% 46%;
-
-  --accent: 38 92% 50%;
-  --accent-foreground: 222 47% 11%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-
-  --sidebar: 220 14% 97%;
-  --sidebar-foreground: 222 47% 11%;
-  --sidebar-border: 220 14% 90%;
-  --sidebar-primary: 262 83% 58%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 220 14% 94%;
-  --sidebar-accent-foreground: 222 47% 11%;
-  --sidebar-ring: 262 83% 58%;
-
-  --chart-1: 262 83% 58%;
-  --chart-2: 199 89% 48%;
-  --chart-3: 38 92% 50%;
-  --chart-4: 142 71% 45%;
-  --chart-5: 0 84% 60%;
-
-  --app-font-sans: 'Inter', 'Noto Sans Devanagari', sans-serif;
-  --app-font-serif: Georgia, serif;
-  --app-font-mono: Menlo, monospace;
-  --radius: 0.75rem;
-
-  --shadow-2xs: 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-xs: 0 2px 4px rgba(0,0,0,0.07);
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
-  --shadow: 0 4px 16px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.07);
-  --shadow-md: 0 8px 24px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.08);
-  --shadow-lg: 0 16px 40px rgba(0,0,0,0.14), 0 8px 18px rgba(0,0,0,0.09);
-  --shadow-xl: 0 24px 60px rgba(0,0,0,0.16), 0 16px 32px rgba(0,0,0,0.10);
-  --shadow-2xl: 0 32px 80px rgba(0,0,0,0.18);
-
-  --tracking-normal: 0em;
-  --spacing: 0.25rem;
-
-  --primary-border: hsl(262 83% 50%);
-  --secondary-border: hsl(199 89% 40%);
-  --muted-border: hsl(220 14% 84%);
-  --accent-border: hsl(38 92% 42%);
-  --destructive-border: hsl(0 84% 52%);
-  --sidebar-primary-border: hsl(262 83% 50%);
-  --sidebar-accent-border: hsl(220 14% 84%);
+  --popover-foreground: 222.2 84% 4.9%;
+  --popover-border: 214.3 31.8% 91.4%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --primary-border: #3b82f6;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --secondary-border: #e2e8f0;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply font-sans antialiased bg-background text-foreground;
-    overflow-x: hidden;
-  }
+* {
+  box-sizing: border-box;
 }
 
-canvas {
-  display: block;
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
-button {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Decorative blobs utility */
-.blob {
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+/* Marathi / Devanagari language override */
+html.lang-mr,
+html.lang-mr body,
+html.lang-mr * {
+  font-family: "Noto Sans Devanagari", "Mukta", "Hind", sans-serif !important;
+  font-weight: 500;
+}
+
+html.lang-mr h1,
+html.lang-mr h2,
+html.lang-mr h3,
+html.lang-mr button {
+  font-weight: 700;
 }

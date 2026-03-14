@@ -14,14 +14,15 @@ function AppContent() {
   const { page } = useApp();
 
   return (
-    <div className="relative">
+    <div className="relative w-full h-full overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={page}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+          className="w-full h-full"
         >
           {page === "landing" && <LandingPage />}
           {page === "scene" && <ThreeDScene />}

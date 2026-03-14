@@ -1,167 +1,205 @@
-import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useApp } from "@/context/AppContext";
 
-const floatingIcons = ["⚡", "💡", "🔋", "🌊", "⚙️", "🏭", "🔌", "🌞"];
+const particles = [
+  { icon: "⚡", x: "8%", y: "15%", size: "2rem", delay: 0 },
+  { icon: "💡", x: "88%", y: "12%", size: "1.8rem", delay: 0.4 },
+  { icon: "🔋", x: "5%", y: "72%", size: "1.6rem", delay: 0.8 },
+  { icon: "🌊", x: "91%", y: "68%", size: "1.9rem", delay: 0.2 },
+  { icon: "⚙️", x: "18%", y: "85%", size: "1.7rem", delay: 1.1 },
+  { icon: "🏭", x: "78%", y: "82%", size: "1.6rem", delay: 0.6 },
+  { icon: "🔌", x: "50%", y: "8%", size: "1.5rem", delay: 1.4 },
+  { icon: "🌞", x: "22%", y: "22%", size: "1.8rem", delay: 0.9 },
+];
 
 export default function LandingPage() {
   const { t, setLanguage, language } = useLanguage();
   const { setPage } = useApp();
-  const [selected, setSelected] = useState<"en" | "mr">(language as "en" | "mr");
 
-  const handleExplore = () => {
-    setLanguage(selected);
-    setPage("scene");
+  const handleLangSelect = (lang: "en" | "mr") => {
+    setLanguage(lang);
   };
 
   return (
     <div
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden"
       style={{
-        background: "linear-gradient(135deg, #f0f9ff 0%, #fef3c7 30%, #fce7f3 60%, #ede9fe 100%)",
+        background: "linear-gradient(145deg, #0f172a 0%, #1e1b4b 40%, #0c4a6e 100%)",
       }}
     >
-      {/* Decorative blobs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-yellow-300 opacity-30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-pink-300 opacity-30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-      <div className="absolute top-1/2 left-0 w-64 h-64 bg-blue-300 opacity-20 rounded-full blur-3xl" />
-      <div className="absolute top-1/3 right-0 w-80 h-80 bg-purple-300 opacity-20 rounded-full blur-3xl" />
+      {/* Subtle radial glow in center */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(124,58,237,0.18) 0%, transparent 70%)",
+        }}
+      />
 
-      {/* Floating background icons */}
-      {floatingIcons.map((icon, i) => (
+      {/* Floating icons */}
+      {particles.map((p, i) => (
         <motion.div
           key={i}
-          className="absolute text-4xl select-none pointer-events-none opacity-20"
-          style={{
-            left: `${8 + (i * 12) % 85}%`,
-            top: `${10 + (i * 17) % 80}%`,
-          }}
-          animate={{ y: [0, -15, 0], rotate: [0, 5, -5, 0] }}
-          transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.3 }}
+          className="absolute select-none pointer-events-none"
+          style={{ left: p.x, top: p.y, fontSize: p.size, opacity: 0.18 }}
+          animate={{ y: [0, -12, 0] }}
+          transition={{ duration: 3.5 + i * 0.4, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
         >
-          {icon}
+          {p.icon}
         </motion.div>
       ))}
 
-      {/* Main card */}
-      <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 bg-white/80 backdrop-blur-xl rounded-[2rem] shadow-2xl shadow-purple-200/50 px-10 py-12 mx-6 max-w-2xl w-full border border-white/60 text-center"
-      >
-        {/* Animated lightning bolt */}
+      {/* Main content — no card, direct on background */}
+      <div className="relative z-10 flex flex-col items-center text-center px-8" style={{ maxWidth: "640px" }}>
+        {/* Lightning bolt */}
         <motion.div
-          animate={{ scale: [1, 1.15, 1], rotate: [-5, 5, -5] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="text-8xl mb-4 inline-block"
+          animate={{ scale: [1, 1.12, 1] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+          style={{ fontSize: "4.5rem", lineHeight: 1, marginBottom: "1.5rem" }}
         >
           ⚡
         </motion.div>
 
+        {/* Title */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="text-4xl md:text-5xl font-extrabold mb-4 leading-tight"
-          style={{ background: "linear-gradient(135deg, #7c3aed, #0ea5e9, #f59e0b)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          style={{
+            fontSize: "clamp(2rem, 4vw, 3rem)",
+            fontWeight: 800,
+            color: "#ffffff",
+            lineHeight: 1.2,
+            marginBottom: "0.75rem",
+            letterSpacing: "-0.02em",
+          }}
         >
           {t("landing.title")}
         </motion.h1>
 
+        {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="text-lg md:text-xl text-gray-600 font-medium mb-3"
+          transition={{ delay: 0.2, duration: 0.5 }}
+          style={{
+            fontSize: "clamp(0.95rem, 1.8vw, 1.15rem)",
+            color: "rgba(255,255,255,0.65)",
+            lineHeight: 1.6,
+            marginBottom: "0.5rem",
+            fontWeight: 400,
+          }}
         >
           {t("landing.subtitle")}
         </motion.p>
 
+        {/* Tagline */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.35 }}
-          className="text-base font-semibold text-orange-500 mb-8"
+          transition={{ delay: 0.3, duration: 0.5 }}
+          style={{
+            fontSize: "0.9rem",
+            color: "#fbbf24",
+            fontWeight: 600,
+            marginBottom: "2.5rem",
+            letterSpacing: "0.02em",
+          }}
         >
           🚀 {t("landing.tagline")}
         </motion.p>
 
-        {/* Language selector label */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.45 }}
-          className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-3"
-        >
-          {t("landing.selectLang")}
-        </motion.p>
-
-        {/* Language buttons */}
+        {/* Language selector */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="flex gap-4 justify-center mb-8"
+          transition={{ delay: 0.4, duration: 0.4 }}
+          style={{ marginBottom: "2rem", width: "100%" }}
         >
-          <motion.button
-            whileHover={{ scale: 1.06, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => setSelected("en")}
-            className={`px-8 py-4 rounded-2xl text-lg font-bold transition-all duration-200 border-2 ${
-              selected === "en"
-                ? "bg-gradient-to-br from-blue-500 to-cyan-500 text-white border-blue-400 shadow-lg shadow-blue-300/40"
-                : "bg-white text-gray-600 border-gray-200 hover:border-blue-300 hover:bg-blue-50"
-            }`}
-          >
-            🇬🇧 English
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.06, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={() => setSelected("mr")}
-            className={`px-8 py-4 rounded-2xl text-lg font-bold transition-all duration-200 border-2 ${
-              selected === "mr"
-                ? "bg-gradient-to-br from-orange-500 to-rose-500 text-white border-orange-400 shadow-lg shadow-orange-300/40"
-                : "bg-white text-gray-600 border-gray-200 hover:border-orange-300 hover:bg-orange-50"
-            }`}
-          >
-            🇮🇳 मराठी
-          </motion.button>
+          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "0.75rem" }}>
+            {t("landing.selectLang")}
+          </p>
+          <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center" }}>
+            {[
+              { code: "en" as const, label: "🇬🇧  English" },
+              { code: "mr" as const, label: "🇮🇳  मराठी" },
+            ].map(({ code, label }) => (
+              <motion.button
+                key={code}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => handleLangSelect(code)}
+                style={{
+                  padding: "0.65rem 1.75rem",
+                  borderRadius: "8px",
+                  fontSize: "1rem",
+                  fontWeight: 600,
+                  border: language === code ? "2px solid #7c3aed" : "2px solid rgba(255,255,255,0.15)",
+                  background: language === code ? "rgba(124,58,237,0.85)" : "rgba(255,255,255,0.07)",
+                  color: language === code ? "#ffffff" : "rgba(255,255,255,0.7)",
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                  backdropFilter: "blur(8px)",
+                }}
+              >
+                {label}
+              </motion.button>
+            ))}
+          </div>
         </motion.div>
 
         {/* Explore button */}
         <motion.button
-          initial={{ opacity: 0, scale: 0.85 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.65, type: "spring", stiffness: 200 }}
-          whileHover={{ scale: 1.07, y: -3 }}
-          whileTap={{ scale: 0.96 }}
-          onClick={handleExplore}
-          className="w-full py-5 text-2xl font-extrabold text-white rounded-2xl shadow-xl shadow-purple-300/50 transition-all"
-          style={{ background: "linear-gradient(135deg, #7c3aed, #0ea5e9)" }}
+          transition={{ delay: 0.55, duration: 0.4, type: "spring", stiffness: 200 }}
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.97 }}
+          onClick={() => setPage("scene")}
+          style={{
+            width: "100%",
+            maxWidth: "360px",
+            padding: "1rem 2rem",
+            background: "linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)",
+            color: "#ffffff",
+            fontWeight: 700,
+            fontSize: "1.15rem",
+            borderRadius: "10px",
+            border: "none",
+            cursor: "pointer",
+            boxShadow: "0 8px 32px rgba(124,58,237,0.4)",
+            letterSpacing: "0.01em",
+          }}
         >
-          {t("landing.explore")} 🚀
+          {t("landing.explore")} →
         </motion.button>
 
-        {/* Step indicator */}
+        {/* Step indicators */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="flex justify-center gap-2 mt-6"
+          transition={{ delay: 0.75 }}
+          style={{ display: "flex", gap: "1.5rem", marginTop: "2.5rem", alignItems: "center" }}
         >
-          {["🔬", "🎬", "🎮", "🧠", "🏆"].map((icon, i) => (
-            <div key={i} className="flex flex-col items-center gap-1">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center text-lg shadow-sm border border-purple-200">
-                {icon}
-              </div>
+          {["🔬 3D Model", "🎬 Video", "🎮 Game", "🧠 Quiz", "🏆 Reward"].map((label, i) => (
+            <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.3rem" }}>
+              <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.4)", fontWeight: 500, whiteSpace: "nowrap" }}>{label}</span>
+              {i < 4 && (
+                <span style={{ position: "absolute", display: "none" }}>→</span>
+              )}
             </div>
           ))}
         </motion.div>
-        <p className="text-xs text-gray-400 mt-2">3D Model → Video → Game → Quiz → Reward</p>
-      </motion.div>
+        {/* Step connector line */}
+        <div style={{ display: "flex", alignItems: "center", marginTop: "0.4rem", gap: "0" }}>
+          {[0,1,2,3,4].map((i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "rgba(124,58,237,0.6)" }} />
+              {i < 4 && <div style={{ width: "32px", height: "1px", background: "rgba(255,255,255,0.1)" }} />}
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

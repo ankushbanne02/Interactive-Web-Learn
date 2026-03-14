@@ -2,41 +2,15 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useApp, AgeGroup } from "@/context/AppContext";
 
-const ageGroups: { id: AgeGroup; icon: string; gradient: string; border: string; shadow: string; bg: string }[] = [
-  {
-    id: "5-10",
-    icon: "🧒",
-    gradient: "from-pink-500 to-rose-400",
-    border: "border-pink-300",
-    shadow: "shadow-pink-200",
-    bg: "from-pink-50 to-rose-50",
-  },
-  {
-    id: "11-18",
-    icon: "🧑",
-    gradient: "from-violet-500 to-purple-400",
-    border: "border-purple-300",
-    shadow: "shadow-purple-200",
-    bg: "from-violet-50 to-purple-50",
-  },
-  {
-    id: "18+",
-    icon: "👩‍🔬",
-    gradient: "from-emerald-500 to-cyan-400",
-    border: "border-emerald-300",
-    shadow: "shadow-emerald-200",
-    bg: "from-emerald-50 to-cyan-50",
-  },
+const groups: { id: AgeGroup; icon: string; color: string; bg: string; border: string }[] = [
+  { id: "5-10", icon: "🧒", color: "#ec4899", bg: "rgba(236,72,153,0.1)", border: "rgba(236,72,153,0.35)" },
+  { id: "11-18", icon: "🧑", color: "#7c3aed", bg: "rgba(124,58,237,0.1)", border: "rgba(124,58,237,0.35)" },
+  { id: "18+", icon: "👩‍🔬", color: "#10b981", bg: "rgba(16,185,129,0.1)", border: "rgba(16,185,129,0.35)" },
 ];
 
 export default function AgeSelection() {
   const { t } = useLanguage();
   const { setPage, setAgeGroup } = useApp();
-
-  const handleSelect = (id: AgeGroup) => {
-    setAgeGroup(id);
-    setPage("video");
-  };
 
   const labels: Record<AgeGroup, { title: string; desc: string }> = {
     "5-10": { title: t("age.group1"), desc: t("age.group1.desc") },
@@ -44,67 +18,105 @@ export default function AgeSelection() {
     "18+": { title: t("age.group3"), desc: t("age.group3.desc") },
   };
 
+  const handleSelect = (id: AgeGroup) => {
+    setAgeGroup(id);
+    setPage("video");
+  };
+
   return (
     <div
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 py-12"
-      style={{ background: "linear-gradient(135deg, #fef9ff 0%, #f0f9ff 50%, #fefce8 100%)" }}
+      className="w-full h-full flex flex-col overflow-hidden"
+      style={{ background: "linear-gradient(145deg, #0f172a 0%, #1e1b4b 60%, #0c2340 100%)" }}
     >
-      {/* Decorative blobs */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-violet-200 opacity-40 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-pink-200 opacity-40 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
-
-      <div className="relative z-10 w-full max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-10"
-        >
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur rounded-full px-5 py-2 shadow-sm border border-purple-100 mb-4">
-            <span className="text-purple-500 font-bold text-sm uppercase tracking-wider">Step 2</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-3">
+      {/* Header */}
+      <div
+        className="shrink-0 flex items-center justify-between px-8"
+        style={{ height: "64px", borderBottom: "1px solid rgba(255,255,255,0.08)", background: "rgba(15,23,42,0.95)" }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <span style={{
+            background: "rgba(124,58,237,0.25)", color: "#a78bfa",
+            fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
+            padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase"
+          }}>
+            Step 2 / 5
+          </span>
+          <h1 style={{ color: "#f1f5f9", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
             {t("age.title")}
           </h1>
-          <p className="text-xl text-gray-500">{t("age.subtitle")}</p>
-        </motion.div>
+        </div>
+        <button
+          onClick={() => setPage("scene")}
+          style={{
+            padding: "0.5rem 1.25rem", borderRadius: "8px", fontSize: "0.9rem",
+            fontWeight: 600, background: "rgba(255,255,255,0.07)", color: "#94a3b8",
+            border: "1px solid rgba(255,255,255,0.1)", cursor: "pointer"
+          }}
+        >
+          ← {t("age.back")}
+        </button>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {ageGroups.map((group, i) => (
+      {/* Content */}
+      <div className="flex-1 flex flex-col items-center justify-center px-8 min-h-0">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          style={{ color: "#94a3b8", fontSize: "1rem", marginBottom: "2.5rem", textAlign: "center" }}
+        >
+          {t("age.subtitle")}
+        </motion.p>
+
+        <div style={{ display: "flex", gap: "24px", width: "100%", maxWidth: "900px" }}>
+          {groups.map((g, i) => (
             <motion.button
-              key={group.id}
-              initial={{ opacity: 0, y: 40 }}
+              key={g.id}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.15 }}
-              whileHover={{ scale: 1.05, y: -6 }}
+              transition={{ delay: i * 0.1, duration: 0.4 }}
+              whileHover={{ scale: 1.04, y: -4 }}
               whileTap={{ scale: 0.97 }}
-              onClick={() => handleSelect(group.id)}
-              className={`bg-gradient-to-br ${group.bg} p-8 rounded-3xl shadow-xl ${group.shadow} flex flex-col items-center gap-4 cursor-pointer border-2 ${group.border} hover:shadow-2xl transition-all duration-200`}
+              onClick={() => handleSelect(g.id)}
+              style={{
+                flex: 1,
+                background: g.bg,
+                border: `1.5px solid ${g.border}`,
+                borderRadius: "14px",
+                padding: "2.5rem 1.5rem",
+                cursor: "pointer",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "1rem",
+                transition: "all 0.2s",
+              }}
             >
-              <div className={`w-24 h-24 rounded-full bg-gradient-to-br ${group.gradient} flex items-center justify-center text-5xl shadow-lg`}>
-                {group.icon}
+              <div style={{
+                width: "80px", height: "80px", borderRadius: "50%",
+                background: `${g.color}22`, border: `2px solid ${g.color}50`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "2.5rem",
+              }}>
+                {g.icon}
               </div>
-              <h2 className="text-2xl font-extrabold text-gray-800">
-                {labels[group.id].title}
-              </h2>
-              <p className="text-gray-500 text-lg font-medium text-center">
-                {labels[group.id].desc}
-              </p>
-              <div className={`px-5 py-2 rounded-full bg-gradient-to-br ${group.gradient} text-white font-bold text-sm shadow-md`}>
+              <div style={{ textAlign: "center" }}>
+                <h2 style={{ color: "#f1f5f9", fontWeight: 700, fontSize: "1.2rem", margin: "0 0 0.4rem" }}>
+                  {labels[g.id].title}
+                </h2>
+                <p style={{ color: "#94a3b8", fontSize: "0.88rem", lineHeight: 1.5, margin: 0 }}>
+                  {labels[g.id].desc}
+                </p>
+              </div>
+              <div style={{
+                padding: "0.45rem 1.5rem", borderRadius: "20px",
+                background: g.color, color: "#ffffff",
+                fontSize: "0.85rem", fontWeight: 700, marginTop: "0.5rem",
+              }}>
                 Select →
               </div>
             </motion.button>
           ))}
         </div>
-
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          onClick={() => setPage("scene")}
-          className="mt-10 mx-auto flex items-center gap-2 px-8 py-3 bg-white hover:bg-gray-50 text-gray-600 rounded-xl text-lg font-semibold border border-gray-200 shadow-sm transition-all hover:shadow-md"
-        >
-          ← {t("age.back")}
-        </motion.button>
       </div>
     </div>
   );

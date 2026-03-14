@@ -4,13 +4,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useApp } from "@/context/AppContext";
 import { getQuestions } from "@/data/quizData";
 
-const optionLetters = ["A", "B", "C", "D"];
-const optionColors = [
-  "from-blue-500 to-cyan-500",
-  "from-violet-500 to-purple-500",
-  "from-orange-500 to-amber-500",
-  "from-pink-500 to-rose-500",
-];
+const LETTERS = ["A", "B", "C", "D"];
 
 export default function QuizSystem() {
   const { t, language } = useLanguage();
@@ -27,6 +21,7 @@ export default function QuizSystem() {
   const [correctCount, setCorrectCount] = useState(0);
 
   const q = questions[current];
+  const progressPct = ((current + (answered ? 1 : 0)) / questions.length) * 100;
 
   const handleSelect = (idx: number) => {
     if (answered) return;
@@ -41,143 +36,208 @@ export default function QuizSystem() {
       setSelected(null);
       setAnswered(false);
     } else {
-      const finalScore = selected === q.correctIndex ? correctCount + 1 : correctCount;
-      setScore(finalScore);
+      setScore(correctCount);
       setPage("reward");
     }
   };
 
-  const getOptionClass = (idx: number) => {
+  const getOptionStyle = (idx: number): React.CSSProperties => {
     if (!answered) {
-      return "bg-white hover:bg-gray-50 text-gray-700 border-gray-200 hover:border-violet-300 hover:shadow-md cursor-pointer";
+      return {
+        background: "rgba(255,255,255,0.04)",
+        border: "1.5px solid rgba(255,255,255,0.12)",
+        color: "#e2e8f0",
+        cursor: "pointer",
+      };
     }
     if (idx === q.correctIndex) {
-      return "bg-gradient-to-r from-emerald-500 to-green-400 text-white border-emerald-400 shadow-emerald-200 cursor-default";
+      return {
+        background: "rgba(16,185,129,0.15)",
+        border: "1.5px solid rgba(16,185,129,0.6)",
+        color: "#6ee7b7",
+        cursor: "default",
+      };
     }
-    if (idx === selected && idx !== q.correctIndex) {
-      return "bg-gradient-to-r from-red-500 to-rose-400 text-white border-red-400 shadow-red-200 cursor-default";
+    if (idx === selected) {
+      return {
+        background: "rgba(239,68,68,0.15)",
+        border: "1.5px solid rgba(239,68,68,0.5)",
+        color: "#fca5a5",
+        cursor: "default",
+      };
     }
-    return "bg-gray-50 text-gray-300 border-gray-100 cursor-default";
+    return {
+      background: "rgba(255,255,255,0.02)",
+      border: "1.5px solid rgba(255,255,255,0.06)",
+      color: "#475569",
+      cursor: "default",
+    };
   };
 
-  const progressPct = ((current + 1) / questions.length) * 100;
+  const isCorrect = selected === q.correctIndex;
 
   return (
     <div
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 py-10"
-      style={{ background: "linear-gradient(135deg, #fef9ff 0%, #f0f9ff 50%, #fefce8 100%)" }}
+      className="w-full h-full flex flex-col overflow-hidden"
+      style={{ background: "#0f172a" }}
     >
-      <div className="absolute top-0 left-0 w-80 h-80 bg-violet-200 opacity-30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-pink-200 opacity-30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-
-      <div className="relative z-10 w-full max-w-3xl">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-5">
+      {/* Header */}
+      <div
+        className="shrink-0 flex items-center justify-between px-8"
+        style={{ height: "64px", borderBottom: "1px solid rgba(255,255,255,0.08)", background: "rgba(15,23,42,0.95)" }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <span style={{
+            background: "rgba(124,58,237,0.25)", color: "#a78bfa",
+            fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
+            padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase"
+          }}>
+            Step 5 / 5
+          </span>
+          <h1 style={{ color: "#f1f5f9", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+            🧠 {t("quiz.title")}
+          </h1>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <span style={{ color: "#64748b", fontSize: "0.88rem", fontWeight: 600 }}>
+            {t("quiz.progress")}{current + 1} / {questions.length}
+          </span>
           <button
             onClick={() => setPage("game")}
-            className="px-5 py-2.5 bg-white hover:bg-gray-50 text-gray-600 rounded-xl font-semibold border border-gray-200 shadow-sm transition-all hover:shadow-md"
+            style={{
+              padding: "0.5rem 1.25rem", borderRadius: "8px", fontSize: "0.9rem",
+              fontWeight: 600, background: "rgba(255,255,255,0.07)", color: "#94a3b8",
+              border: "1px solid rgba(255,255,255,0.1)", cursor: "pointer"
+            }}
           >
             ← {t("quiz.back")}
           </button>
-          <div className="flex flex-col items-center">
-            <div className="inline-flex items-center gap-2 bg-white/80 rounded-full px-4 py-1 border border-violet-200 mb-1">
-              <span className="text-violet-600 font-bold text-xs uppercase tracking-wider">Step 5</span>
-            </div>
-            <h1 className="text-2xl font-extrabold text-gray-800">{t("quiz.title")} ⚡</h1>
-          </div>
-          <div className="px-5 py-2.5 bg-white text-violet-700 rounded-xl font-bold text-lg border border-violet-200 shadow-sm">
-            {current + 1} / {questions.length}
-          </div>
         </div>
+      </div>
 
-        {/* Progress bar */}
-        <div className="w-full h-4 bg-gray-100 rounded-full mb-6 overflow-hidden shadow-inner">
-          <motion.div
-            className="h-full rounded-full"
-            style={{ background: "linear-gradient(90deg, #7c3aed, #0ea5e9)" }}
-            animate={{ width: `${progressPct}%` }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          />
-        </div>
+      {/* Progress bar */}
+      <div className="shrink-0" style={{ height: "3px", background: "rgba(255,255,255,0.06)" }}>
+        <motion.div
+          animate={{ width: `${progressPct}%` }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          style={{ height: "100%", background: "linear-gradient(90deg, #7c3aed, #2563eb)" }}
+        />
+      </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -60 }}
-            transition={{ duration: 0.35 }}
-          >
-            {/* Question card */}
-            <div className="bg-white rounded-3xl p-8 mb-5 shadow-xl shadow-purple-100 border border-purple-100">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white font-extrabold text-lg shrink-0 shadow-md">
-                  {t("quiz.progress").charAt(0)}{current + 1}
-                </div>
-                <p className="text-2xl md:text-3xl font-bold text-gray-800 leading-relaxed">
-                  {q.question}
-                </p>
-              </div>
-            </div>
-
-            {/* Options */}
-            <div className="grid grid-cols-1 gap-3 mb-5">
-              {q.options.map((opt, idx) => (
-                <motion.button
-                  key={idx}
-                  whileHover={!answered ? { scale: 1.02, x: 4 } : {}}
-                  whileTap={!answered ? { scale: 0.99 } : {}}
-                  onClick={() => handleSelect(idx)}
-                  className={`w-full text-left px-6 py-4 rounded-2xl text-xl font-semibold border-2 transition-all shadow-sm ${getOptionClass(idx)}`}
-                >
-                  <span className={`inline-flex w-9 h-9 rounded-full items-center justify-center text-sm font-bold mr-4 shrink-0 ${
-                    !answered ? `bg-gradient-to-br ${optionColors[idx]} text-white` : "bg-white/30 text-current"
-                  }`}>
-                    {optionLetters[idx]}
-                  </span>
-                  {opt}
-                </motion.button>
-              ))}
-            </div>
-
-            {/* Feedback */}
-            <AnimatePresence>
-              {answered && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className={`rounded-2xl p-5 mb-5 border-2 ${
-                    selected === q.correctIndex
-                      ? "bg-emerald-50 border-emerald-200"
-                      : "bg-red-50 border-red-200"
-                  }`}
-                >
-                  <p className={`text-xl font-bold mb-2 ${selected === q.correctIndex ? "text-emerald-700" : "text-red-700"}`}>
-                    {selected === q.correctIndex ? t("quiz.correct") : t("quiz.wrong")}
+      {/* Quiz content */}
+      <div className="flex-1 min-h-0 flex items-center justify-center px-8 py-6">
+        <div style={{ width: "100%", maxWidth: "720px" }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.28 }}
+            >
+              {/* Question */}
+              <div style={{
+                background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)",
+                borderRadius: "12px", padding: "24px 28px", marginBottom: "16px",
+              }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}>
+                  <div style={{
+                    width: "36px", height: "36px", borderRadius: "8px", flexShrink: 0,
+                    background: "rgba(124,58,237,0.3)", display: "flex",
+                    alignItems: "center", justifyContent: "center",
+                    color: "#a78bfa", fontWeight: 800, fontSize: "0.9rem",
+                  }}>
+                    {t("quiz.progress")}{current + 1}
+                  </div>
+                  <p style={{ color: "#f1f5f9", fontSize: "1.2rem", fontWeight: 600, lineHeight: 1.55, margin: 0 }}>
+                    {q.question}
                   </p>
-                  {selected !== q.correctIndex && (
-                    <p className="text-gray-600 text-lg leading-relaxed">{q.explanation}</p>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                </div>
+              </div>
 
-            {answered && (
-              <motion.button
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                whileHover={{ scale: 1.04, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                onClick={handleNext}
-                className="w-full py-5 text-white text-xl font-extrabold rounded-2xl shadow-xl shadow-violet-200 transition-all"
-                style={{ background: "linear-gradient(135deg, #7c3aed, #0ea5e9)" }}
-              >
-                {current < questions.length - 1 ? `${t("quiz.next")} →` : "🎉 See My Results!"}
-              </motion.button>
-            )}
-          </motion.div>
-        </AnimatePresence>
+              {/* Options */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginBottom: "14px" }}>
+                {q.options.map((opt, idx) => (
+                  <motion.button
+                    key={idx}
+                    whileHover={!answered ? { x: 4 } : {}}
+                    onClick={() => handleSelect(idx)}
+                    style={{
+                      width: "100%",
+                      textAlign: "left",
+                      padding: "13px 18px",
+                      borderRadius: "10px",
+                      fontSize: "0.95rem",
+                      fontWeight: 500,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "12px",
+                      transition: "all 0.15s",
+                      ...getOptionStyle(idx),
+                    }}
+                  >
+                    <span style={{
+                      width: "28px", height: "28px", borderRadius: "6px",
+                      background: "rgba(124,58,237,0.25)", color: "#a78bfa",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      fontSize: "0.8rem", fontWeight: 700, flexShrink: 0,
+                    }}>
+                      {LETTERS[idx]}
+                    </span>
+                    {opt}
+                  </motion.button>
+                ))}
+              </div>
+
+              {/* Feedback */}
+              <AnimatePresence>
+                {answered && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    style={{
+                      borderRadius: "10px",
+                      padding: "12px 16px",
+                      marginBottom: "12px",
+                      background: isCorrect ? "rgba(16,185,129,0.1)" : "rgba(239,68,68,0.1)",
+                      border: `1px solid ${isCorrect ? "rgba(16,185,129,0.3)" : "rgba(239,68,68,0.3)"}`,
+                    }}
+                  >
+                    <p style={{ color: isCorrect ? "#6ee7b7" : "#fca5a5", fontWeight: 700, fontSize: "0.95rem", margin: "0 0 4px" }}>
+                      {isCorrect ? t("quiz.correct") : t("quiz.wrong")}
+                    </p>
+                    {!isCorrect && (
+                      <p style={{ color: "#94a3b8", fontSize: "0.85rem", lineHeight: 1.5, margin: 0 }}>
+                        {q.explanation}
+                      </p>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Next button */}
+              {answered && (
+                <motion.button
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={handleNext}
+                  style={{
+                    width: "100%", padding: "0.85rem",
+                    background: "linear-gradient(135deg, #7c3aed, #2563eb)",
+                    color: "#ffffff", fontWeight: 700, fontSize: "1rem",
+                    borderRadius: "10px", border: "none", cursor: "pointer",
+                    boxShadow: "0 4px 20px rgba(124,58,237,0.35)",
+                  }}
+                >
+                  {current < questions.length - 1 ? `${t("quiz.next")} →` : "🎉 See Results"}
+                </motion.button>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );

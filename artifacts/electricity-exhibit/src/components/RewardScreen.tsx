@@ -12,11 +12,11 @@ export default function RewardScreen() {
   useEffect(() => {
     if (fired.current) return;
     fired.current = true;
-    const end = Date.now() + 4000;
-    const colors = ["#7c3aed", "#0ea5e9", "#f59e0b", "#10b981", "#ec4899"];
+    const end = Date.now() + 3500;
+    const colors = ["#7c3aed", "#2563eb", "#f59e0b", "#10b981", "#ec4899"];
     const frame = () => {
-      confetti({ particleCount: 6, angle: 60, spread: 60, origin: { x: 0 }, colors });
-      confetti({ particleCount: 6, angle: 120, spread: 60, origin: { x: 1 }, colors });
+      confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors });
+      confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors });
       if (Date.now() < end) requestAnimationFrame(frame);
     };
     frame();
@@ -33,106 +33,129 @@ export default function RewardScreen() {
     return t("reward.keep");
   };
 
-  const getScoreColor = () => {
-    if (score >= 4) return "from-emerald-500 to-green-400";
-    if (score >= 2) return "from-blue-500 to-cyan-400";
-    return "from-orange-500 to-amber-400";
-  };
+  const scoreColor = score >= 4 ? "#10b981" : score >= 2 ? "#7c3aed" : "#f59e0b";
+  const scoreBg = score >= 4 ? "rgba(16,185,129,0.15)" : score >= 2 ? "rgba(124,58,237,0.15)" : "rgba(245,158,11,0.15)";
 
   return (
     <div
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 py-12"
-      style={{ background: "linear-gradient(135deg, #fefce8 0%, #f0fdf4 30%, #faf5ff 70%, #fef3c7 100%)" }}
+      className="w-full h-full flex flex-col items-center justify-center overflow-hidden"
+      style={{ background: "linear-gradient(145deg, #0f172a 0%, #1e1b4b 60%, #0c2340 100%)" }}
     >
-      {/* Blobs */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-yellow-200 opacity-50 rounded-full blur-3xl -translate-x-1/3 -translate-y-1/3" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-purple-200 opacity-50 rounded-full blur-3xl translate-x-1/3 translate-y-1/3" />
-      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-green-200 opacity-30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+      {/* Radial glow */}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: `radial-gradient(ellipse 50% 50% at 50% 50%, ${scoreColor}15 0%, transparent 70%)`,
+      }} />
 
-      <div className="relative z-10 flex flex-col items-center gap-6 text-center max-w-2xl w-full">
+      <div style={{
+        position: "relative", zIndex: 1,
+        display: "flex", flexDirection: "column", alignItems: "center",
+        textAlign: "center", gap: "1.5rem", padding: "2rem",
+        maxWidth: "560px", width: "100%",
+      }}>
         {/* Trophy */}
         <motion.div
-          initial={{ scale: 0, rotate: -180 }}
+          initial={{ scale: 0, rotate: -120 }}
           animate={{ scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 150, damping: 10 }}
-          className="text-9xl"
+          transition={{ type: "spring", stiffness: 160, damping: 12 }}
+          style={{ fontSize: "5rem", lineHeight: 1 }}
         >
           🏆
         </motion.div>
 
+        {/* Title */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="text-5xl md:text-6xl font-extrabold text-gray-800"
+          transition={{ delay: 0.2 }}
+          style={{ color: "#f1f5f9", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}
         >
           {t("reward.title")}
         </motion.h1>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4 }}
-          className="bg-white rounded-3xl px-8 py-6 shadow-xl border border-purple-100 max-w-lg"
+        {/* Message */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.35 }}
+          style={{ color: "#94a3b8", fontSize: "0.95rem", lineHeight: 1.6, margin: 0 }}
         >
-          <p className="text-xl text-gray-600 leading-relaxed">
-            {t("reward.message")}
-          </p>
-        </motion.div>
+          {t("reward.message")}
+        </motion.p>
 
         {/* Score card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.55, type: "spring" }}
-          className={`bg-gradient-to-br ${getScoreColor()} rounded-3xl px-16 py-8 shadow-2xl text-white`}
+          transition={{ delay: 0.5, type: "spring" }}
+          style={{
+            background: scoreBg,
+            border: `1.5px solid ${scoreColor}40`,
+            borderRadius: "14px",
+            padding: "1.5rem 3rem",
+          }}
         >
-          <p className="text-white/80 text-lg font-bold mb-1 uppercase tracking-wider">
+          <p style={{ color: scoreColor, fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "0.5rem" }}>
             {t("reward.score")}
           </p>
-          <p className="text-7xl font-extrabold">{score} / 5</p>
+          <p style={{ color: "#f1f5f9", fontSize: "4rem", fontWeight: 800, lineHeight: 1, margin: 0 }}>
+            {score}<span style={{ fontSize: "1.5rem", color: "#64748b", fontWeight: 500 }}> / 5</span>
+          </p>
         </motion.div>
 
         {/* Stars */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="flex gap-3"
+          transition={{ delay: 0.65 }}
+          style={{ display: "flex", gap: "0.5rem" }}
         >
           {[1, 2, 3, 4, 5].map((i) => (
             <motion.span
               key={i}
-              initial={{ scale: 0, rotate: -30 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: 0.7 + i * 0.1, type: "spring", stiffness: 200 }}
-              className={`text-5xl transition-all ${i <= score ? "opacity-100 drop-shadow-lg" : "opacity-20 grayscale"}`}
-            >
-              ⭐
-            </motion.span>
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.65 + i * 0.08, type: "spring", stiffness: 220 }}
+              style={{
+                fontSize: "2.2rem",
+                filter: i <= score ? "drop-shadow(0 0 6px rgba(251,191,36,0.7))" : "grayscale(1) opacity(0.2)",
+              }}
+            >⭐</motion.span>
           ))}
         </motion.div>
 
-        {/* Message badge */}
+        {/* Performance label */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3 }}
-          className="bg-white rounded-2xl px-8 py-4 shadow-lg border border-gray-100"
+          transition={{ delay: 1.1 }}
+          style={{
+            padding: "0.65rem 1.5rem",
+            borderRadius: "8px",
+            background: "rgba(255,255,255,0.06)",
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}
         >
-          <p className="text-xl font-bold text-gray-700">{getMessage()}</p>
+          <p style={{ color: "#e2e8f0", fontWeight: 600, fontSize: "0.95rem", margin: 0 }}>
+            {getMessage()}
+          </p>
         </motion.div>
 
         {/* Restart button */}
         <motion.button
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, type: "spring" }}
-          whileHover={{ scale: 1.07, y: -3 }}
+          transition={{ delay: 1.3 }}
+          whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.97 }}
           onClick={handleRestart}
-          className="px-14 py-5 text-white text-2xl font-extrabold rounded-full shadow-2xl shadow-violet-200 transition-all"
-          style={{ background: "linear-gradient(135deg, #7c3aed, #0ea5e9)" }}
+          style={{
+            padding: "0.9rem 3rem",
+            background: "linear-gradient(135deg, #7c3aed, #2563eb)",
+            color: "#ffffff", fontWeight: 700, fontSize: "1.05rem",
+            borderRadius: "10px", border: "none", cursor: "pointer",
+            boxShadow: "0 6px 24px rgba(124,58,237,0.4)",
+          }}
         >
           🚀 {t("reward.restart")}
         </motion.button>
