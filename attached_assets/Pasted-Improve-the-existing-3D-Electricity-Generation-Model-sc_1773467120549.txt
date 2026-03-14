@@ -1,0 +1,156 @@
+Improve the existing **3D Electricity Generation Model scene** without changing the overall structure.
+
+The current model is good, but some visual adjustments are needed to make it clearer and more educational for children visiting a science park.
+
+Do NOT recreate the scene.
+Only modify **environment, labels, instruction text, and electricity animation**.
+
+---
+
+# 1 REDUCE GREEN BACKGROUND AREA
+
+Currently the background has **too much green terrain**, which makes the scene look flat and empty.
+
+Adjust the environment so it looks more balanced.
+
+Make these changes:
+
+• Reduce the size of the green ground area
+• Add more **sky background (light blue gradient)**
+• Add small distant hills instead of large green fields
+• Keep only a narrow green strip where the electricity system sits
+
+Goal:
+The focus should remain on the **electricity system**, not on the ground.
+
+---
+
+# 2 REMOVE TREE NEAR DAM
+
+There is a tree placed very close to the hydro dam.
+
+Remove this tree because:
+
+• it distracts from the dam structure
+• it overlaps visually with the water area
+
+Trees can remain near the house side but **not near the dam**.
+
+---
+
+# 3 ADD CLEAR COMPONENT LABELS
+
+Each part of the system should have a visible label so children can easily understand the process.
+
+Add a small label **above or below each component**:
+
+Hydro Dam
+Water Turbine
+Electric Generator
+Transformer
+Transmission Tower
+Distribution Transformer
+Home
+
+Label design:
+
+• white or dark text depending on background
+• small rounded background behind text
+• readable font size
+
+Labels must stay visible when rotating the scene.
+
+---
+
+# 4 IMPROVE INSTRUCTION TEXT
+
+The instruction text currently reads:
+
+"Click on any component to learn more • Drag to rotate • Scroll to zoom"
+
+Make the instruction text more visible.
+
+Changes:
+
+• Increase text size slightly
+• Change color to **black**
+• Make font weight **500 or 600**
+
+Place the instruction text inside a **light semi-transparent bar** above the component buttons so it is clearly visible.
+
+Example layout:
+
+---
+
+Click on any component to learn more
+Drag to rotate • Scroll to zoom
+
+---
+
+This bar should be centered and clearly readable.
+
+---
+
+# 5 MAKE CLICK INSTRUCTION CLEAR
+
+To make the interaction clearer for children:
+
+Make the first part bold.
+
+Example:
+
+**Click on any component to learn more**
+
+Drag to rotate • Scroll to zoom
+
+---
+
+# 6 FIX ELECTRICITY FLOW ANIMATION
+
+Currently the electricity particles moving through the transmission line are **jumping or breaking**.
+
+Fix this so electricity flows smoothly from one component to the next.
+
+Correct animation path:
+
+Dam → Turbine → Generator → Transformer → Transmission Tower → Distribution Transformer → House
+
+Electricity visualization:
+
+• glowing yellow particles or line
+• smooth continuous motion
+• no jumping between segments
+
+The electricity should appear like **energy flowing along the wires**.
+
+---
+
+# 7 IMPROVE WIRE CONNECTIONS
+
+Ensure the transmission wires connect clearly between:
+
+Generator → Transformer
+Transformer → Tower
+Tower → Distribution Transformer
+Distribution Transformer → House
+
+Electricity animation should follow the exact wire path.
+
+---
+
+# FINAL GOAL
+
+The final scene should look like:
+
+A **clear, colorful 3D electricity generation diagram** that children can easily understand.
+
+Focus should be on:
+
+Dam → Turbine → Generator → Transformer → Transmission → Home
+
+Everything should be:
+
+• visually clear
+• labeled
+• educational
+• easy to interact with.
