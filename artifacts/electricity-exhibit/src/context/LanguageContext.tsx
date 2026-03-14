@@ -83,6 +83,11 @@ const translations: Record<string, Record<Language, string>> = {
   "step.game":   { en: "Game",     mr: "खेळ" },
   "step.quiz":   { en: "Quiz",     mr: "प्रश्नमंजुषा" },
   "step.reward": { en: "Reward",   mr: "पुरस्कार" },
+  // Scene UI
+  "scene.stepLabel":   { en: "Step",    mr: "टप्पा" },
+  "scene.clickHint":   { en: "👆 Click on any component to learn more", mr: "👆 घटकांवर क्लिक करून अधिक जाणून घ्या" },
+  "scene.dragHint":    { en: "🖱️ Drag to rotate  •  Scroll to zoom",    mr: "🖱️ फिरवण्यासाठी ड्रॅग करा  •  झूम करण्यासाठी स्क्रोल करा" },
+  "obj.distTr.name":   { en: "Dist. Transformer", mr: "वितरण ट्रान्सफॉर्मर" },
   // Help
   "help.title": { en: "How to use", mr: "कसे वापरावे" },
   "help.tip1": { en: "Click on any 3D object to read about it", mr: "त्याबद्दल वाचण्यासाठी कोणत्याही 3D ऑब्जेक्टवर क्लिक करा" },

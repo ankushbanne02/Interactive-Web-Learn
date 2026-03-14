@@ -71,7 +71,7 @@ export default function AgeSelection() {
             fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
             padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase",
           }}>
-            Step 2 / 5
+            {t("scene.stepLabel")} 2 / 5
           </span>
           <h1 style={{ color: "#1e293b", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
             🎓 {t("age.title")}

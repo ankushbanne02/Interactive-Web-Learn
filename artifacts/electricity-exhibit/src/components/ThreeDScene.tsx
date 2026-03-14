@@ -240,7 +240,7 @@ function ReservoirWater() {
 
 // ─── Hydro Dam ───────────────────────────────────────────────────────────────
 
-function Dam({ onClick, active }: { onClick: () => void; active: boolean }) {
+function Dam({ onClick, active, label }: { onClick: () => void; active: boolean; label: string }) {
   const highlight = active ? "#38bdf8" : "#000";
   const hlI = active ? 1.2 : 0;
   return (
@@ -259,14 +259,14 @@ function Dam({ onClick, active }: { onClick: () => void; active: boolean }) {
       {[-1.5,0,1.5].map((z,i) => (
         <Box3 key={i} pos={[-0.55,-0.5,z]} size={[0.6,3,0.38]} color="#90a4ae" roughness={0.8} />
       ))}
-      <Label3D pos={[0, 3.3, 2.8]} text="💧 Hydro Dam" color="#38bdf8" />
+      <Label3D pos={[0, 3.3, 2.8]} text={label} color="#38bdf8" />
     </group>
   );
 }
 
 // ─── Water Turbine ───────────────────────────────────────────────────────────
 
-function Turbine({ onClick, active }: { onClick: () => void; active: boolean }) {
+function Turbine({ onClick, active, label }: { onClick: () => void; active: boolean; label: string }) {
   const bladeRef = useRef<THREE.Group>(null);
   useFrame(({ clock }) => { if (bladeRef.current) bladeRef.current.rotation.z = clock.getElapsedTime()*3.2; });
   return (
@@ -298,14 +298,14 @@ function Turbine({ onClick, active }: { onClick: () => void; active: boolean }) 
         <meshStandardMaterial color="#94a3b8" roughness={0.3} metalness={0.7} />
       </mesh>
       <Box3 pos={[0,-1.2,0]} size={[2.4,0.4,1.8]} color="#94a3b8" roughness={0.7} metalness={0.3} />
-      <Label3D pos={[0, 1.9, 1.2]} text="⚙️ Water Turbine" color="#3b82f6" />
+      <Label3D pos={[0, 1.9, 1.2]} text={label} color="#3b82f6" />
     </group>
   );
 }
 
 // ─── Generator ───────────────────────────────────────────────────────────────
 
-function Generator({ onClick, active }: { onClick: () => void; active: boolean }) {
+function Generator({ onClick, active, label }: { onClick: () => void; active: boolean; label: string }) {
   const ringRef = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => { if (ringRef.current) ringRef.current.rotation.y = clock.getElapsedTime()*2.5; });
   return (
@@ -326,14 +326,14 @@ function Generator({ onClick, active }: { onClick: () => void; active: boolean }
       <Box3 pos={[0.9,0.5,0]} size={[0.08,0.45,0.45]} color="#fef9c3" emissive="#fef08a" ei={active?1.5:0.5} roughness={0.1} />
       <Box3 pos={[-0.9,0.5,0]} size={[0.08,0.45,0.45]} color="#fef9c3" emissive="#fef08a" ei={active?1.5:0.5} roughness={0.1} />
       <Box3 pos={[0,-1.3,0]} size={[2.6,0.42,2.2]} color="#94a3b8" roughness={0.8} />
-      <Label3D pos={[0, 2.7, 1.1]} text="🔋 Electric Generator" color="#f97316" />
+      <Label3D pos={[0, 2.7, 1.1]} text={label} color="#f97316" />
     </group>
   );
 }
 
 // ─── Step-up Transformer ─────────────────────────────────────────────────────
 
-function Transformer({ onClick, active }: { onClick: () => void; active: boolean }) {
+function Transformer({ onClick, active, label }: { onClick: () => void; active: boolean; label: string }) {
   const glowRef = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => {
     if (glowRef.current)
@@ -362,7 +362,7 @@ function Transformer({ onClick, active }: { onClick: () => void; active: boolean
       ))}
       <Cable points={[[-1.2,0.05,0.3],[1.2,0.05,0.3],[1.2,0.05,-0.3],[-1.2,0.05,-0.3],[-1.2,0.05,0.3]]} color="#64748b" />
       <Box3 pos={[0,-1.36,0]} size={[3,0.3,2]} color="#94a3b8" roughness={0.7} />
-      <Label3D pos={[0, 2.7, 0.85]} text="🔌 Step-up Transformer" color="#eab308" />
+      <Label3D pos={[0, 2.7, 0.85]} text={label} color="#eab308" />
     </group>
   );
 }
@@ -397,7 +397,7 @@ function Tower({ pos, active }: { pos: [number,number,number]; active: boolean }
   );
 }
 
-function TransmissionLine({ onClick, active }: { onClick: () => void; active: boolean }) {
+function TransmissionLine({ onClick, active, label }: { onClick: () => void; active: boolean; label: string }) {
   return (
     <group onClick={onClick}>
       <Tower pos={[4,0,0]} active={active} />
@@ -405,14 +405,14 @@ function TransmissionLine({ onClick, active }: { onClick: () => void; active: bo
       {[-1.2,0,1.2].map((x,i) => (
         <Cable key={i} points={[[1.6,1.4,x*0.05],[4,0.52,x*0.05],[6.5,0.52,x*0.05],[7.8,0.92,x*0.05]]} color={active?"#fef08a":"#fbbf24"} opacity={active?1.0:0.95} />
       ))}
-      <Label3D pos={[5.2, 2.5, 0.45]} text="🗼 Transmission Tower" color="#64748b" />
+      <Label3D pos={[5.2, 2.5, 0.45]} text={label} color="#64748b" />
     </group>
   );
 }
 
 // ─── Distribution Transformer ────────────────────────────────────────────────
 
-function DistTransformer({ pos }: { pos: [number,number,number] }) {
+function DistTransformer({ pos, label }: { pos: [number,number,number]; label: string }) {
   return (
     <group position={pos}>
       <Cyl3 pos={[0,-0.5,0]} args={[0.08,0.08,3.2,8]} color="#92400e" roughness={0.9} />
@@ -427,14 +427,14 @@ function DistTransformer({ pos }: { pos: [number,number,number] }) {
           </mesh>
         </group>
       ))}
-      <Label3D pos={[0, 2.5, 0.5]} text="🔌 Dist. Transformer" color="#eab308" />
+      <Label3D pos={[0, 2.5, 0.5]} text={label} color="#eab308" />
     </group>
   );
 }
 
 // ─── House ───────────────────────────────────────────────────────────────────
 
-function House({ onClick, active }: { onClick: () => void; active: boolean }) {
+function House({ onClick, active, label }: { onClick: () => void; active: boolean; label: string }) {
   const w1 = useRef<THREE.Mesh>(null);
   const w2 = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => {
@@ -472,14 +472,14 @@ function House({ onClick, active }: { onClick: () => void; active: boolean }) {
       <Cable points={[[-1.3,-0.6,1.42],[1.3,-0.6,1.42]]} color="#f59e0b" />
       <Box3 pos={[0,-1.25,0]} size={[3.2,0.3,2.8]} color="#94a3b8" roughness={0.8} />
       <Cable points={[[-2.1,1.65,0],[-1.55,1.1,0]]} color="#475569" opacity={0.9} />
-      <Label3D pos={[0, 2.5, 1.45]} text="🏠 Home" color="#22c55e" />
+      <Label3D pos={[0, 2.5, 1.45]} text={label} color="#22c55e" />
     </group>
   );
 }
 
 // ─── Main Scene ──────────────────────────────────────────────────────────────
 
-function Scene({ onSelect, selectedId }: { onSelect: (id: string) => void; selectedId: string | null }) {
+function Scene({ onSelect, selectedId, t }: { onSelect: (id: string) => void; selectedId: string | null; t: (k: string) => string }) {
   return (
     <>
       <color attach="background" args={["#87ceeb"]} />
@@ -493,19 +493,18 @@ function Scene({ onSelect, selectedId }: { onSelect: (id: string) => void; selec
       <pointLight position={[-11,6,2]} intensity={0.7} color="#bae6fd" distance={16} />
       <pointLight position={[10,6,2]} intensity={0.6} color="#bbf7d0" distance={14} />
 
-      {/* Dynamic pulsing glow light on selected component */}
       <SelectionGlow selectedId={selectedId} />
 
       <Landscape />
       <ReservoirWater />
 
-      <Dam        onClick={() => onSelect("dam")}         active={selectedId==="dam"} />
-      <Turbine    onClick={() => onSelect("turbine")}     active={selectedId==="turbine"} />
-      <Generator  onClick={() => onSelect("generator")}  active={selectedId==="generator"} />
-      <Transformer onClick={() => onSelect("transformer")} active={selectedId==="transformer"} />
-      <TransmissionLine onClick={() => onSelect("lines")} active={selectedId==="lines"} />
-      <DistTransformer pos={[8.5,0,0]} />
-      <House      onClick={() => onSelect("house")}      active={selectedId==="house"} />
+      <Dam        onClick={() => onSelect("dam")}         active={selectedId==="dam"}         label={`${t("obj.dam.emoji")} ${t("obj.dam.name")}`} />
+      <Turbine    onClick={() => onSelect("turbine")}     active={selectedId==="turbine"}     label={`${t("obj.turbine.emoji")} ${t("obj.turbine.name")}`} />
+      <Generator  onClick={() => onSelect("generator")}  active={selectedId==="generator"}   label={`${t("obj.generator.emoji")} ${t("obj.generator.name")}`} />
+      <Transformer onClick={() => onSelect("transformer")} active={selectedId==="transformer"} label={`${t("obj.transformer.emoji")} ${t("obj.transformer.name")}`} />
+      <TransmissionLine onClick={() => onSelect("lines")} active={selectedId==="lines"}      label={`${t("obj.lines.emoji")} ${t("obj.lines.name")}`} />
+      <DistTransformer pos={[8.5,0,0]}                                                       label={`${t("obj.transformer.emoji")} ${t("obj.distTr.name")}`} />
+      <House      onClick={() => onSelect("house")}      active={selectedId==="house"}       label={`${t("obj.house.emoji")} ${t("obj.house.name")}`} />
 
       <Cable points={[[-9.7,0.35,0],[-8.15,0.35,0]]} color="#60a5fa" opacity={0.9} />
       <Cable points={[[-5.95,0.3,0],[-5.3,0.3,0]]}   color="#93c5fd" opacity={0.85} />
@@ -538,7 +537,7 @@ export default function ThreeDScene() {
         style={{ height:"64px", borderBottom:"1px solid #e2e8f0", background:"#ffffff" }}>
         <div style={{ display:"flex", alignItems:"center", gap:"12px" }}>
           <span style={{ background:"rgba(124,58,237,0.1)", color:"#7c3aed", fontSize:"0.72rem", fontWeight:700, letterSpacing:"0.1em", padding:"0.25rem 0.75rem", borderRadius:"4px", textTransform:"uppercase" }}>
-            Step 1 / 5
+            {t("scene.stepLabel")} 1 / 5
           </span>
           <h1 style={{ color:"#1e293b", fontSize:"1.1rem", fontWeight:700, margin:0 }}>⚡ {t("scene.title")}</h1>
         </div>
@@ -558,7 +557,7 @@ export default function ThreeDScene() {
       <div className="flex-1 relative min-h-0">
         <Canvas camera={{ position:[0, 10, 28], fov:50 }} shadows style={{ width:"100%", height:"100%" }}>
           <Suspense fallback={null}>
-            <Scene onSelect={id => setSelectedId(id===selectedId?null:id)} selectedId={selectedId} />
+            <Scene onSelect={id => setSelectedId(id===selectedId?null:id)} selectedId={selectedId} t={t} />
           </Suspense>
         </Canvas>
 
@@ -610,10 +609,10 @@ export default function ThreeDScene() {
         <div style={{ display:"flex", justifyContent:"center", alignItems:"center",
           background:"#f8fafc", border:"1px solid #e2e8f0", borderRadius:"8px", padding:"5px 16px", gap:"16px", flexWrap:"wrap" }}>
           <span style={{ color:"#1e293b", fontSize:"0.82rem", fontWeight:700 }}>
-            👆 Click on any component to learn more
+            {t("scene.clickHint")}
           </span>
           <span style={{ color:"#64748b", fontSize:"0.79rem", fontWeight:500 }}>
-            🖱️ Drag to rotate &nbsp;•&nbsp; Scroll to zoom
+            {t("scene.dragHint")}
           </span>
         </div>
         <div style={{ display:"flex", gap:"6px", flexWrap:"wrap", justifyContent:"center" }}>
