@@ -37,15 +37,6 @@ export default function LandingPage() {
           width: "100%",
         }}
       >
-        {/* Lightning bolt */}
-        <motion.div
-          animate={{ scale: [1, 1.15, 1], rotate: [0, -5, 5, 0] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-          style={{ fontSize: "4.5rem", lineHeight: 1, marginBottom: "1.2rem" }}
-        >
-          ⚡
-        </motion.div>
-
         {/* Title */}
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
@@ -94,7 +85,7 @@ export default function LandingPage() {
             border: "1px solid rgba(124,58,237,0.15)",
           }}
         >
-          🚀 {t("landing.tagline")}
+          {t("landing.tagline")}
         </motion.p>
 
         {/* Language selector */}
