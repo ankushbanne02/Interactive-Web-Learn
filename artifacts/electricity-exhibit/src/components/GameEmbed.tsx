@@ -7,21 +7,21 @@ export default function GameEmbed() {
   const { setPage } = useApp();
 
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden" style={{ background: "#0f172a" }}>
+    <div className="w-full h-full flex flex-col overflow-hidden" style={{ background: "#f8fafc" }}>
       {/* Header */}
       <div
         className="shrink-0 flex items-center justify-between px-8"
-        style={{ height: "64px", borderBottom: "1px solid rgba(255,255,255,0.08)", background: "rgba(15,23,42,0.95)" }}
+        style={{ height: "64px", borderBottom: "1px solid #e2e8f0", background: "#ffffff" }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <span style={{
-            background: "rgba(245,158,11,0.2)", color: "#fbbf24",
+            background: "rgba(245,158,11,0.12)", color: "#d97706",
             fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
             padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase"
           }}>
             Step 4 / 5
           </span>
-          <h1 style={{ color: "#f1f5f9", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+          <h1 style={{ color: "#1e293b", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
             🎮 {t("game.title")}
           </h1>
         </div>
@@ -30,8 +30,8 @@ export default function GameEmbed() {
             onClick={() => setPage("video")}
             style={{
               padding: "0.5rem 1.25rem", borderRadius: "8px", fontSize: "0.9rem",
-              fontWeight: 600, background: "rgba(255,255,255,0.07)", color: "#94a3b8",
-              border: "1px solid rgba(255,255,255,0.1)", cursor: "pointer"
+              fontWeight: 600, background: "#f1f5f9", color: "#475569",
+              border: "1px solid #e2e8f0", cursor: "pointer"
             }}
           >
             ← {t("game.back")}
@@ -44,7 +44,7 @@ export default function GameEmbed() {
               padding: "0.5rem 1.5rem", borderRadius: "8px", fontSize: "0.9rem",
               fontWeight: 700, background: "linear-gradient(135deg, #7c3aed, #2563eb)",
               color: "#ffffff", border: "none", cursor: "pointer",
-              boxShadow: "0 4px 14px rgba(124,58,237,0.4)"
+              boxShadow: "0 4px 14px rgba(124,58,237,0.35)"
             }}
           >
             {t("game.next")}

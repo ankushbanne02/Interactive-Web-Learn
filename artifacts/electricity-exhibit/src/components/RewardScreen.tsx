@@ -34,17 +34,18 @@ export default function RewardScreen() {
   };
 
   const scoreColor = score >= 4 ? "#10b981" : score >= 2 ? "#7c3aed" : "#f59e0b";
-  const scoreBg = score >= 4 ? "rgba(16,185,129,0.15)" : score >= 2 ? "rgba(124,58,237,0.15)" : "rgba(245,158,11,0.15)";
+  const scoreBg = score >= 4 ? "rgba(16,185,129,0.08)" : score >= 2 ? "rgba(124,58,237,0.08)" : "rgba(245,158,11,0.08)";
+  const scoreBorder = score >= 4 ? "rgba(16,185,129,0.3)" : score >= 2 ? "rgba(124,58,237,0.3)" : "rgba(245,158,11,0.3)";
 
   return (
     <div
       className="w-full h-full flex flex-col items-center justify-center overflow-hidden"
-      style={{ background: "linear-gradient(145deg, #0f172a 0%, #1e1b4b 60%, #0c2340 100%)" }}
+      style={{ background: "linear-gradient(145deg, #f0f9ff 0%, #faf5ff 50%, #f0fdf4 100%)" }}
     >
-      {/* Radial glow */}
+      {/* Subtle radial glow */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: `radial-gradient(ellipse 50% 50% at 50% 50%, ${scoreColor}15 0%, transparent 70%)`,
+        background: `radial-gradient(ellipse 50% 50% at 50% 50%, ${scoreColor}10 0%, transparent 70%)`,
       }} />
 
       <div style={{
@@ -68,7 +69,7 @@ export default function RewardScreen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          style={{ color: "#f1f5f9", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}
+          style={{ color: "#1e293b", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 800, margin: 0, letterSpacing: "-0.02em" }}
         >
           {t("reward.title")}
         </motion.h1>
@@ -78,7 +79,7 @@ export default function RewardScreen() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.35 }}
-          style={{ color: "#94a3b8", fontSize: "0.95rem", lineHeight: 1.6, margin: 0 }}
+          style={{ color: "#64748b", fontSize: "0.95rem", lineHeight: 1.6, margin: 0 }}
         >
           {t("reward.message")}
         </motion.p>
@@ -90,16 +91,17 @@ export default function RewardScreen() {
           transition={{ delay: 0.5, type: "spring" }}
           style={{
             background: scoreBg,
-            border: `1.5px solid ${scoreColor}40`,
+            border: `1.5px solid ${scoreBorder}`,
             borderRadius: "14px",
             padding: "1.5rem 3rem",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
           }}
         >
           <p style={{ color: scoreColor, fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "0.5rem" }}>
             {t("reward.score")}
           </p>
-          <p style={{ color: "#f1f5f9", fontSize: "4rem", fontWeight: 800, lineHeight: 1, margin: 0 }}>
-            {score}<span style={{ fontSize: "1.5rem", color: "#64748b", fontWeight: 500 }}> / 5</span>
+          <p style={{ color: "#1e293b", fontSize: "4rem", fontWeight: 800, lineHeight: 1, margin: 0 }}>
+            {score}<span style={{ fontSize: "1.5rem", color: "#94a3b8", fontWeight: 500 }}> / 5</span>
           </p>
         </motion.div>
 
@@ -118,7 +120,7 @@ export default function RewardScreen() {
               transition={{ delay: 0.65 + i * 0.08, type: "spring", stiffness: 220 }}
               style={{
                 fontSize: "2.2rem",
-                filter: i <= score ? "drop-shadow(0 0 6px rgba(251,191,36,0.7))" : "grayscale(1) opacity(0.2)",
+                filter: i <= score ? "drop-shadow(0 0 6px rgba(251,191,36,0.7))" : "grayscale(1) opacity(0.25)",
               }}
             >⭐</motion.span>
           ))}
@@ -132,11 +134,12 @@ export default function RewardScreen() {
           style={{
             padding: "0.65rem 1.5rem",
             borderRadius: "8px",
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.1)",
+            background: "#ffffff",
+            border: "1px solid #e2e8f0",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
           }}
         >
-          <p style={{ color: "#e2e8f0", fontWeight: 600, fontSize: "0.95rem", margin: 0 }}>
+          <p style={{ color: "#334155", fontWeight: 600, fontSize: "0.95rem", margin: 0 }}>
             {getMessage()}
           </p>
         </motion.div>
@@ -154,7 +157,7 @@ export default function RewardScreen() {
             background: "linear-gradient(135deg, #7c3aed, #2563eb)",
             color: "#ffffff", fontWeight: 700, fontSize: "1.05rem",
             borderRadius: "10px", border: "none", cursor: "pointer",
-            boxShadow: "0 6px 24px rgba(124,58,237,0.4)",
+            boxShadow: "0 6px 24px rgba(124,58,237,0.35)",
           }}
         >
           🚀 {t("reward.restart")}

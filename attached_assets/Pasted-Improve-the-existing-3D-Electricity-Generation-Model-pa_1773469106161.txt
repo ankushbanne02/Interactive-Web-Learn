@@ -1,0 +1,157 @@
+Improve the existing **3D Electricity Generation Model page**.
+Do NOT regenerate the model. Only fix **camera angle, ground alignment, lighting, background clutter, labels, and website theme**.
+
+The goal is to make the scene look like a **clear educational electricity flow diagram placed on a ground surface**, not floating in the air.
+
+---
+
+# FIX CAMERA ANGLE
+
+Currently the model can be seen from **below**, which makes objects appear floating.
+
+Adjust the camera settings:
+
+• Camera should always stay **above the ground plane**
+• Limit vertical rotation so users cannot rotate below the scene
+• Default camera position should show the scene **slightly from top-front view**
+
+Example view:
+
+Dam → Turbine → Generator → Transformer → Transmission → House
+
+Everything should appear **resting on the ground**, not floating.
+
+---
+
+# FIX FLOATING HOUSE
+
+The house appears to be floating.
+
+Fix this by:
+
+• Aligning the base of the house with the ground plane
+• Ensuring all components share the same ground level (y = 0)
+
+Components that must sit on the ground:
+
+Hydro Dam
+Water Turbine
+Electric Generator
+Transformer
+Transmission Towers
+Distribution Transformer
+House
+
+---
+
+# ADD PROPER GROUND SURFACE
+
+Add a **simple flat ground plane** so objects do not look like they are floating.
+
+Ground design:
+
+• light green grass surface
+• slightly textured but simple
+• extend across the entire scene
+
+This will anchor all components visually.
+
+---
+
+# REMOVE GREEN BACKGROUND CIRCLES
+
+Behind the scene there are large green circular shapes that block the view.
+
+Fix this by:
+
+• Removing the circular green shapes
+OR
+• Reducing their size and moving them further back
+
+The background should not hide the electricity components.
+
+---
+
+# CLEAN BACKGROUND
+
+Use a simple environment:
+
+Sky color:
+
+light blue gradient
+
+Optional:
+
+small distant hills or mountains
+
+Keep the background **minimal so the electricity model stays clear**.
+
+---
+
+# ADD LABELS FOR EACH COMPONENT
+
+Add clear labels above or below each element so users understand the system.
+
+Labels should appear as small floating tags.
+
+Components to label:
+
+Hydro Dam
+Water Turbine
+Electric Generator
+Step-up Transformer
+Transmission Tower
+Distribution Transformer
+Home
+
+Label design:
+
+• rounded background
+• readable font
+• small drop shadow
+
+Labels must stay visible when rotating.
+
+---
+
+# FIX ELECTRICITY FLOW ANIMATION
+
+Electricity lines currently jump between wires.
+
+Fix the animation so energy flows smoothly along the wires.
+
+Flow path:
+
+Dam → Turbine → Generator → Transformer → Transmission Tower → Distribution Transformer → House
+
+Use glowing yellow energy moving smoothly along the cables.
+
+---
+
+# MAKE WEBSITE LIGHT MODE
+
+Convert the entire website UI from **dark mode to light mode**.
+
+Use:
+
+Background: light gray or white
+Cards: white
+Text: dark gray or black
+Buttons: keep colorful gradient style
+
+The interface should feel like a **modern educational science website**.
+
+---
+
+# FINAL GOAL
+
+The final experience should look like:
+
+A **clean, colorful electricity generation journey diagram placed on a ground surface**, clearly showing how electricity travels from a hydro dam to a home.
+
+The scene should be:
+
+• grounded (not floating)
+• easy to understand
+• visually clean
+• suitable for children in a science exhibit.

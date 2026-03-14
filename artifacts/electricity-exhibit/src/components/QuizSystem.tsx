@@ -44,32 +44,32 @@ export default function QuizSystem() {
   const getOptionStyle = (idx: number): React.CSSProperties => {
     if (!answered) {
       return {
-        background: "rgba(255,255,255,0.04)",
-        border: "1.5px solid rgba(255,255,255,0.12)",
-        color: "#e2e8f0",
+        background: "#ffffff",
+        border: "1.5px solid #e2e8f0",
+        color: "#334155",
         cursor: "pointer",
       };
     }
     if (idx === q.correctIndex) {
       return {
-        background: "rgba(16,185,129,0.15)",
-        border: "1.5px solid rgba(16,185,129,0.6)",
-        color: "#6ee7b7",
+        background: "rgba(16,185,129,0.08)",
+        border: "1.5px solid rgba(16,185,129,0.5)",
+        color: "#047857",
         cursor: "default",
       };
     }
     if (idx === selected) {
       return {
-        background: "rgba(239,68,68,0.15)",
-        border: "1.5px solid rgba(239,68,68,0.5)",
-        color: "#fca5a5",
+        background: "rgba(239,68,68,0.08)",
+        border: "1.5px solid rgba(239,68,68,0.4)",
+        color: "#b91c1c",
         cursor: "default",
       };
     }
     return {
-      background: "rgba(255,255,255,0.02)",
-      border: "1.5px solid rgba(255,255,255,0.06)",
-      color: "#475569",
+      background: "#f8fafc",
+      border: "1.5px solid #e2e8f0",
+      color: "#94a3b8",
       cursor: "default",
     };
   };
@@ -79,22 +79,22 @@ export default function QuizSystem() {
   return (
     <div
       className="w-full h-full flex flex-col overflow-hidden"
-      style={{ background: "#0f172a" }}
+      style={{ background: "#f8fafc" }}
     >
       {/* Header */}
       <div
         className="shrink-0 flex items-center justify-between px-8"
-        style={{ height: "64px", borderBottom: "1px solid rgba(255,255,255,0.08)", background: "rgba(15,23,42,0.95)" }}
+        style={{ height: "64px", borderBottom: "1px solid #e2e8f0", background: "#ffffff" }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <span style={{
-            background: "rgba(124,58,237,0.25)", color: "#a78bfa",
+            background: "rgba(124,58,237,0.1)", color: "#7c3aed",
             fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
             padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase"
           }}>
             Step 5 / 5
           </span>
-          <h1 style={{ color: "#f1f5f9", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+          <h1 style={{ color: "#1e293b", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
             🧠 {t("quiz.title")}
           </h1>
         </div>
@@ -106,8 +106,8 @@ export default function QuizSystem() {
             onClick={() => setPage("game")}
             style={{
               padding: "0.5rem 1.25rem", borderRadius: "8px", fontSize: "0.9rem",
-              fontWeight: 600, background: "rgba(255,255,255,0.07)", color: "#94a3b8",
-              border: "1px solid rgba(255,255,255,0.1)", cursor: "pointer"
+              fontWeight: 600, background: "#f1f5f9", color: "#475569",
+              border: "1px solid #e2e8f0", cursor: "pointer"
             }}
           >
             ← {t("quiz.back")}
@@ -116,7 +116,7 @@ export default function QuizSystem() {
       </div>
 
       {/* Progress bar */}
-      <div className="shrink-0" style={{ height: "3px", background: "rgba(255,255,255,0.06)" }}>
+      <div className="shrink-0" style={{ height: "4px", background: "#e2e8f0" }}>
         <motion.div
           animate={{ width: `${progressPct}%` }}
           transition={{ duration: 0.5, ease: "easeOut" }}
@@ -137,19 +137,20 @@ export default function QuizSystem() {
             >
               {/* Question */}
               <div style={{
-                background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)",
+                background: "#ffffff", border: "1px solid #e2e8f0",
                 borderRadius: "12px", padding: "24px 28px", marginBottom: "16px",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
               }}>
                 <div style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}>
                   <div style={{
                     width: "36px", height: "36px", borderRadius: "8px", flexShrink: 0,
-                    background: "rgba(124,58,237,0.3)", display: "flex",
+                    background: "rgba(124,58,237,0.1)", display: "flex",
                     alignItems: "center", justifyContent: "center",
-                    color: "#a78bfa", fontWeight: 800, fontSize: "0.9rem",
+                    color: "#7c3aed", fontWeight: 800, fontSize: "0.9rem",
                   }}>
                     {t("quiz.progress")}{current + 1}
                   </div>
-                  <p style={{ color: "#f1f5f9", fontSize: "1.2rem", fontWeight: 600, lineHeight: 1.55, margin: 0 }}>
+                  <p style={{ color: "#1e293b", fontSize: "1.2rem", fontWeight: 600, lineHeight: 1.55, margin: 0 }}>
                     {q.question}
                   </p>
                 </div>
@@ -173,12 +174,13 @@ export default function QuizSystem() {
                       alignItems: "center",
                       gap: "12px",
                       transition: "all 0.15s",
+                      boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                       ...getOptionStyle(idx),
                     }}
                   >
                     <span style={{
                       width: "28px", height: "28px", borderRadius: "6px",
-                      background: "rgba(124,58,237,0.25)", color: "#a78bfa",
+                      background: "rgba(124,58,237,0.1)", color: "#7c3aed",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       fontSize: "0.8rem", fontWeight: 700, flexShrink: 0,
                     }}>
@@ -200,15 +202,15 @@ export default function QuizSystem() {
                       borderRadius: "10px",
                       padding: "12px 16px",
                       marginBottom: "12px",
-                      background: isCorrect ? "rgba(16,185,129,0.1)" : "rgba(239,68,68,0.1)",
+                      background: isCorrect ? "rgba(16,185,129,0.08)" : "rgba(239,68,68,0.08)",
                       border: `1px solid ${isCorrect ? "rgba(16,185,129,0.3)" : "rgba(239,68,68,0.3)"}`,
                     }}
                   >
-                    <p style={{ color: isCorrect ? "#6ee7b7" : "#fca5a5", fontWeight: 700, fontSize: "0.95rem", margin: "0 0 4px" }}>
+                    <p style={{ color: isCorrect ? "#047857" : "#b91c1c", fontWeight: 700, fontSize: "0.95rem", margin: "0 0 4px" }}>
                       {isCorrect ? t("quiz.correct") : t("quiz.wrong")}
                     </p>
                     {!isCorrect && (
-                      <p style={{ color: "#94a3b8", fontSize: "0.85rem", lineHeight: 1.5, margin: 0 }}>
+                      <p style={{ color: "#64748b", fontSize: "0.85rem", lineHeight: 1.5, margin: 0 }}>
                         {q.explanation}
                       </p>
                     )}
@@ -229,7 +231,7 @@ export default function QuizSystem() {
                     background: "linear-gradient(135deg, #7c3aed, #2563eb)",
                     color: "#ffffff", fontWeight: 700, fontSize: "1rem",
                     borderRadius: "10px", border: "none", cursor: "pointer",
-                    boxShadow: "0 4px 20px rgba(124,58,237,0.35)",
+                    boxShadow: "0 4px 20px rgba(124,58,237,0.3)",
                   }}
                 >
                   {current < questions.length - 1 ? `${t("quiz.next")} →` : "🎉 See Results"}

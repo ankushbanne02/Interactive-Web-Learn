@@ -95,7 +95,7 @@ function ElectricParticle({ speed=4, offset=0, color="#fef08a" }: { speed?: numb
   return (
     <mesh ref={ref}>
       <sphereGeometry args={[0.11, 7, 7]} />
-      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} roughness={0} />
+      <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3.5} roughness={0} />
     </mesh>
   );
 }
@@ -111,19 +111,24 @@ function Cable({ points, color="#fbbf24", opacity=0.9 }: { points: [number,numbe
   return <line geometry={geom}><lineBasicMaterial color={color} opacity={opacity} transparent /></line>;
 }
 
-// ─── Label with background panel ─────────────────────────────────────────────
+// ─── Label with bright background panel ──────────────────────────────────────
 
 function Label3D({ pos, text }: { pos: [number,number,number]; text: string }) {
-  const bgW = text.length * 0.21 + 0.5;
+  const bgW = text.length * 0.21 + 0.6;
   return (
     <group position={pos}>
-      {/* Semi-transparent dark background pill */}
+      {/* White background pill */}
       <mesh position={[0, 0, -0.01]}>
-        <boxGeometry args={[bgW, 0.52, 0.04]} />
-        <meshStandardMaterial color="#0f172a" transparent opacity={0.72} roughness={1} />
+        <boxGeometry args={[bgW, 0.58, 0.06]} />
+        <meshStandardMaterial color="#ffffff" transparent opacity={0.95} roughness={1} />
       </mesh>
-      <Text fontSize={0.38} color="#f8fafc" anchorX="center" anchorY="middle"
-        outlineWidth={0.02} outlineColor="#000" maxWidth={6}>
+      {/* Subtle colored border */}
+      <mesh position={[0, 0, -0.02]}>
+        <boxGeometry args={[bgW + 0.06, 0.64, 0.04]} />
+        <meshStandardMaterial color="#e2e8f0" transparent opacity={0.9} roughness={1} />
+      </mesh>
+      <Text fontSize={0.33} color="#1e293b" anchorX="center" anchorY="middle"
+        outlineWidth={0} maxWidth={6} font={undefined}>
         {text}
       </Text>
     </group>
@@ -153,50 +158,50 @@ function Tree({ pos }: { pos: [number,number,number] }) {
 function Landscape() {
   return (
     <group>
-      {/* Narrow green ground strip — keeps focus on the system */}
-      <mesh rotation={[-Math.PI/2,0,0]} position={[0,-2,0]} receiveShadow>
-        <planeGeometry args={[50, 9]} />
-        <meshStandardMaterial color="#22c55e" roughness={0.9} />
+      {/* Main green ground — raised to match component bases */}
+      <mesh rotation={[-Math.PI/2,0,0]} position={[0,-1.65,0]} receiveShadow>
+        <planeGeometry args={[60, 12]} />
+        <meshStandardMaterial color="#4ade80" roughness={0.88} />
       </mesh>
-      {/* Lighter path strip */}
-      <mesh rotation={[-Math.PI/2,0,0]} position={[0,-1.97,0]}>
-        <planeGeometry args={[50,2.4]} />
-        <meshStandardMaterial color="#4ade80" roughness={0.9} />
+      {/* Lighter path strip between components */}
+      <mesh rotation={[-Math.PI/2,0,0]} position={[0,-1.63,0]}>
+        <planeGeometry args={[50,2.0]} />
+        <meshStandardMaterial color="#86efac" roughness={0.88} />
       </mesh>
-      {/* Wide sky-coloured base plane behind hills */}
-      <mesh rotation={[-Math.PI/2,0,0]} position={[0,-2.1,-6]}>
-        <planeGeometry args={[60, 14]} />
+      {/* Sky-coloured far base plane */}
+      <mesh rotation={[-Math.PI/2,0,0]} position={[0,-1.75,-8]}>
+        <planeGeometry args={[80, 18]} />
         <meshStandardMaterial color="#bfdbfe" roughness={1} />
       </mesh>
-      {/* Water / river surface near dam */}
-      <mesh rotation={[-Math.PI/2,0,0]} position={[-11,-1.88,0]}>
+      {/* Water / reservoir surface near dam */}
+      <mesh rotation={[-Math.PI/2,0,0]} position={[-11,-1.5,0]}>
         <planeGeometry args={[7,7]} />
         <meshStandardMaterial color="#60a5fa" transparent opacity={0.88} roughness={0.1} metalness={0.2} />
       </mesh>
       {/* Water channel dam→turbine */}
-      <mesh rotation={[-Math.PI/2,0,0]} position={[-8.5,-1.92,0]}>
+      <mesh rotation={[-Math.PI/2,0,0]} position={[-8.5,-1.55,0]}>
         <planeGeometry args={[2.2,1.6]} />
         <meshStandardMaterial color="#93c5fd" transparent opacity={0.8} roughness={0.1} />
       </mesh>
-      {/* Smaller distant hills — framing, not dominating */}
-      {[[-14,-1.6,-6],[-5,-1.7,-6],[5,-1.7,-6],[14,-1.6,-6]].map(([x,y,z],i) => (
+      {/* Small distant hills — pushed far back so they don't clutter the view */}
+      {[[-16,-1.5,-11],[-6,-1.6,-11],[6,-1.6,-11],[16,-1.5,-11]].map(([x,y,z],i) => (
         <mesh key={i} position={[x,y,z]}>
-          <sphereGeometry args={[2.8,10,6]} />
+          <sphereGeometry args={[1.8,10,6]} />
           <meshStandardMaterial color="#16a34a" roughness={0.9} />
         </mesh>
       ))}
-      {[[-18,-1.7,-5],[0,-1.8,-6],[9,-1.7,-5],[18,-1.7,-5]].map(([x,y,z],i) => (
+      {[[-20,-1.6,-10],[0,-1.7,-11],[10,-1.6,-10],[20,-1.6,-10]].map(([x,y,z],i) => (
         <mesh key={i+10} position={[x,y,z]}>
-          <sphereGeometry args={[2.2,8,5]} />
+          <sphereGeometry args={[1.4,8,5]} />
           <meshStandardMaterial color="#15803d" roughness={0.9} />
         </mesh>
       ))}
-      {/* Trees — house side only, not near dam */}
-      <Tree pos={[13.5,-1.0,-2]} />
-      <Tree pos={[14.5,-1.0,2.5]} />
-      <Tree pos={[12.0,-1.0,3]} />
-      <Tree pos={[2.5,-1.0,-3.2]} />
-      <Tree pos={[9.0,-1.0,-3]} />
+      {/* Trees — house side only */}
+      <Tree pos={[13.5,-0.65,-2]} />
+      <Tree pos={[14.5,-0.65,2.5]} />
+      <Tree pos={[12.0,-0.65,3]} />
+      <Tree pos={[2.5,-0.65,-3.2]} />
+      <Tree pos={[9.0,-0.65,-3]} />
     </group>
   );
 }
@@ -206,10 +211,10 @@ function Landscape() {
 function ReservoirWater() {
   const ref = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => {
-    if (ref.current) ref.current.position.y = -0.05 + Math.sin(clock.getElapsedTime()*1.3)*0.04;
+    if (ref.current) ref.current.position.y = -0.1 + Math.sin(clock.getElapsedTime()*1.3)*0.04;
   });
   return (
-    <mesh ref={ref} rotation={[-Math.PI/2,0,0]} position={[-13.5,-0.0,0]}>
+    <mesh ref={ref} rotation={[-Math.PI/2,0,0]} position={[-13.5,-0.1,0]}>
       <planeGeometry args={[5.5,7]} />
       <meshStandardMaterial color="#38bdf8" transparent opacity={0.85} roughness={0.05} metalness={0.3} emissive="#0ea5e9" emissiveIntensity={0.08} />
     </mesh>
@@ -242,7 +247,7 @@ function Dam({ onClick, active }: { onClick: () => void; active: boolean }) {
       {[-1.5,0,1.5].map((z,i) => (
         <Box3 key={i} pos={[-0.55,-0.5,z]} size={[0.6,3,0.38]} color="#90a4ae" roughness={0.8} />
       ))}
-      <Label3D pos={[0,-2.9,2.9]} text="💧 Hydro Dam" />
+      <Label3D pos={[0, 3.2, 2.8]} text="💧 Hydro Dam" />
     </group>
   );
 }
@@ -285,7 +290,7 @@ function Turbine({ onClick, active }: { onClick: () => void; active: boolean }) 
         <meshStandardMaterial color="#94a3b8" roughness={0.3} metalness={0.7} />
       </mesh>
       <Box3 pos={[0,-1.2,0]} size={[2.4,0.4,1.8]} color="#94a3b8" roughness={0.7} metalness={0.3} />
-      <Label3D pos={[0,-2.1,1.15]} text="⚙️ Water Turbine" />
+      <Label3D pos={[0, 1.9, 1.2]} text="⚙️ Water Turbine" />
     </group>
   );
 }
@@ -321,7 +326,7 @@ function Generator({ onClick, active }: { onClick: () => void; active: boolean }
       <Box3 pos={[-0.9,0.5,0]} size={[0.08,0.45,0.45]} color="#fef9c3" emissive="#fef08a" ei={0.5} roughness={0.1} />
       {/* Concrete base */}
       <Box3 pos={[0,-1.3,0]} size={[2.6,0.42,2.2]} color="#94a3b8" roughness={0.8} />
-      <Label3D pos={[0,-2.1,1.25]} text="🔋 Electric Generator" />
+      <Label3D pos={[0, 2.7, 1.1]} text="🔋 Electric Generator" />
     </group>
   );
 }
@@ -363,7 +368,7 @@ function Transformer({ onClick, active }: { onClick: () => void; active: boolean
       ))}
       <Cable points={[[-1.2,0.05,0.3],[1.2,0.05,0.3],[1.2,0.05,-0.3],[-1.2,0.05,-0.3],[-1.2,0.05,0.3]]} color="#64748b" />
       <Box3 pos={[0,-1.36,0]} size={[3,0.3,2]} color="#94a3b8" roughness={0.7} />
-      <Label3D pos={[0,-2.15,1.2]} text="🔌 Transformer" />
+      <Label3D pos={[0, 2.7, 0.85]} text="🔌 Step-up Transformer" />
     </group>
   );
 }
@@ -412,7 +417,7 @@ function TransmissionLine({ onClick, active }: { onClick: () => void; active: bo
       {[-1.2,0,1.2].map((x,i) => (
         <Cable key={i} points={[[1.6,1.4,x*0.05],[4,0.52,x*0.05],[6.5,0.52,x*0.05],[7.8,0.92,x*0.05]]} color="#fbbf24" opacity={0.95} />
       ))}
-      <Label3D pos={[5.2,-2.6,0.45]} text="🗼 Transmission Tower" />
+      <Label3D pos={[5.2, 2.5, 0.45]} text="🗼 Transmission Tower" />
     </group>
   );
 }
@@ -435,7 +440,7 @@ function DistTransformer({ pos }: { pos: [number,number,number] }) {
         </group>
       ))}
       <Box3 pos={[0,1.05,0]} size={[0.85,0.065,0.065]} color="#92400e" roughness={0.8} />
-      <Label3D pos={[0,-2.0,0.5]} text="🔌 Dist. Transformer" />
+      <Label3D pos={[0, 2.5, 0.5]} text="🔌 Dist. Transformer" />
     </group>
   );
 }
@@ -451,7 +456,7 @@ function House({ onClick, active }: { onClick: () => void; active: boolean }) {
     if (w2.current) (w2.current.material as THREE.MeshStandardMaterial).emissiveIntensity = p;
   });
   return (
-    <group position={[10,-0.3,0]} onClick={onClick}>
+    <group position={[10,-0.5,0]} onClick={onClick}>
       {/* Cream/pastel walls */}
       <Box3 pos={[0,0.5,0]} size={[2.4,2.0,2.0]} color={active?"#fef9c3":"#fef3c7"} emissive="#fef08a" ei={active?0.2:0} roughness={0.75} />
       {/* Bright red roof */}
@@ -486,11 +491,11 @@ function House({ onClick, active }: { onClick: () => void; active: boolean }) {
         <Cyl3 key={i} pos={[x,-0.9,1.42]} args={[0.045,0.045,0.62,6]} color="#f59e0b" roughness={0.7} />
       ))}
       <Cable points={[[-1.3,-0.6,1.42],[1.3,-0.6,1.42]]} color="#f59e0b" />
-      {/* Base */}
-      <Box3 pos={[0,-1.2,0]} size={[3.2,0.3,2.8]} color="#94a3b8" roughness={0.8} />
+      {/* Base — properly grounded */}
+      <Box3 pos={[0,-1.25,0]} size={[3.2,0.3,2.8]} color="#94a3b8" roughness={0.8} />
       {/* Service wire */}
       <Cable points={[[-2.1,1.65,0],[-1.55,1.1,0]]} color="#475569" opacity={0.9} />
-      <Label3D pos={[0,-2.05,1.45]} text="🏠 Home" />
+      <Label3D pos={[0, 2.5, 1.45]} text="🏠 Home" />
     </group>
   );
 }
@@ -500,19 +505,19 @@ function House({ onClick, active }: { onClick: () => void; active: boolean }) {
 function Scene({ onSelect, selectedId }: { onSelect: (id: string) => void; selectedId: string | null }) {
   return (
     <>
-      {/* Bright sky blue background */}
+      {/* Light blue sky background */}
       <color attach="background" args={["#87ceeb"]} />
-      {/* Light blue horizon fog */}
-      <fog attach="fog" args={["#bfdbfe", 28, 55]} />
+      {/* Subtle horizon fog — minimal so components stay visible */}
+      <fog attach="fog" args={["#c7e7ff", 32, 65]} />
 
       {/* Bright daylight lighting */}
-      <ambientLight intensity={1.4} color="#fff8f0" />
-      <directionalLight position={[8, 16, 10]} intensity={1.8} castShadow color="#fffbeb"
-        shadow-mapSize={[1024,1024]} shadow-camera-far={50} shadow-camera-left={-20} shadow-camera-right={20} shadow-camera-top={12} shadow-camera-bottom={-12} />
-      <directionalLight position={[-12, 8, 6]} intensity={0.5} color="#dbeafe" />
-      <directionalLight position={[0, 4, 14]} intensity={0.4} color="#f0fdf4" />
-      <pointLight position={[-11,5,2]} intensity={0.6} color="#bae6fd" distance={14} />
-      <pointLight position={[10,5,2]} intensity={0.5} color="#bbf7d0" distance={12} />
+      <ambientLight intensity={1.6} color="#fff8f0" />
+      <directionalLight position={[8, 18, 12]} intensity={2.0} castShadow color="#fffbeb"
+        shadow-mapSize={[1024,1024]} shadow-camera-far={55} shadow-camera-left={-22} shadow-camera-right={22} shadow-camera-top={14} shadow-camera-bottom={-14} />
+      <directionalLight position={[-12, 10, 8]} intensity={0.6} color="#dbeafe" />
+      <directionalLight position={[0, 6, 16]} intensity={0.5} color="#f0fdf4" />
+      <pointLight position={[-11,6,2]} intensity={0.7} color="#bae6fd" distance={16} />
+      <pointLight position={[10,6,2]} intensity={0.6} color="#bbf7d0" distance={14} />
 
       {/* Landscape */}
       <Landscape />
@@ -537,13 +542,21 @@ function Scene({ onSelect, selectedId }: { onSelect: (id: string) => void; selec
       {/* Animated electric flow */}
       <ElectricityFlow />
 
-      <OrbitControls enableDamping dampingFactor={0.07} minDistance={10} maxDistance={32}
-        maxPolarAngle={Math.PI/1.9} target={[0,0,0]} />
+      {/* Camera controls — constrained to stay above ground */}
+      <OrbitControls
+        enableDamping
+        dampingFactor={0.07}
+        minDistance={10}
+        maxDistance={34}
+        minPolarAngle={Math.PI / 10}
+        maxPolarAngle={Math.PI / 2.15}
+        target={[0, 0, 0]}
+      />
     </>
   );
 }
 
-// ─── Page wrapper (UI layout unchanged) ──────────────────────────────────────
+// ─── Page wrapper ──────────────────────────────────────────────────────────────
 
 export default function ThreeDScene() {
   const { t } = useLanguage();
@@ -553,20 +566,20 @@ export default function ThreeDScene() {
   const accent = selectedId ? accentColors[selectedId] : "#7c3aed";
 
   return (
-    <div className="w-full h-full flex flex-col overflow-hidden" style={{ background: "#87ceeb" }}>
+    <div className="w-full h-full flex flex-col overflow-hidden" style={{ background: "#f0f9ff" }}>
 
       {/* ── Header ── */}
       <div className="shrink-0 flex items-center justify-between px-8"
-        style={{ height:"64px", borderBottom:"1px solid rgba(0,0,0,0.08)", background:"rgba(255,255,255,0.92)", backdropFilter:"blur(8px)" }}>
+        style={{ height:"64px", borderBottom:"1px solid #e2e8f0", background:"#ffffff" }}>
         <div style={{ display:"flex", alignItems:"center", gap:"12px" }}>
-          <span style={{ background:"rgba(124,58,237,0.12)", color:"#7c3aed", fontSize:"0.72rem", fontWeight:700, letterSpacing:"0.1em", padding:"0.25rem 0.75rem", borderRadius:"4px", textTransform:"uppercase" }}>
+          <span style={{ background:"rgba(124,58,237,0.1)", color:"#7c3aed", fontSize:"0.72rem", fontWeight:700, letterSpacing:"0.1em", padding:"0.25rem 0.75rem", borderRadius:"4px", textTransform:"uppercase" }}>
             Step 1 / 5
           </span>
           <h1 style={{ color:"#1e293b", fontSize:"1.1rem", fontWeight:700, margin:0 }}>⚡ {t("scene.title")}</h1>
         </div>
         <div style={{ display:"flex", gap:"8px" }}>
           <button onClick={() => setPage("landing")}
-            style={{ padding:"0.5rem 1.25rem", borderRadius:"8px", fontSize:"0.9rem", fontWeight:600, background:"rgba(0,0,0,0.05)", color:"#475569", border:"1px solid rgba(0,0,0,0.1)", cursor:"pointer" }}>
+            style={{ padding:"0.5rem 1.25rem", borderRadius:"8px", fontSize:"0.9rem", fontWeight:600, background:"#f1f5f9", color:"#475569", border:"1px solid #e2e8f0", cursor:"pointer" }}>
             ← {t("scene.back")}
           </button>
           <button onClick={() => setPage("age")}
@@ -578,7 +591,11 @@ export default function ThreeDScene() {
 
       {/* ── 3D Canvas ── */}
       <div className="flex-1 relative min-h-0">
-        <Canvas camera={{ position:[0,5,22], fov:50 }} shadows style={{ width:"100%", height:"100%" }}>
+        <Canvas
+          camera={{ position:[0, 10, 28], fov:50 }}
+          shadows
+          style={{ width:"100%", height:"100%" }}
+        >
           <Suspense fallback={null}>
             <Scene onSelect={id => setSelectedId(id===selectedId?null:id)} selectedId={selectedId} />
           </Suspense>
@@ -590,9 +607,9 @@ export default function ThreeDScene() {
             <motion.div initial={{ opacity:0, x:24 }} animate={{ opacity:1, x:0 }} exit={{ opacity:0, x:24 }}
               transition={{ duration:0.22 }}
               style={{ position:"absolute", top:"16px", right:"16px", width:"310px", maxHeight:"calc(100% - 32px)",
-                background:"rgba(255,255,255,0.97)", border:`1px solid ${accent}40`,
+                background:"rgba(255,255,255,0.98)", border:`1px solid ${accent}40`,
                 borderRadius:"12px", display:"flex", flexDirection:"column",
-                boxShadow:`0 8px 32px rgba(0,0,0,0.15), 0 0 0 1px ${accent}15`, overflow:"hidden" }}>
+                boxShadow:`0 8px 32px rgba(0,0,0,0.12), 0 0 0 1px ${accent}15`, overflow:"hidden" }}>
               <div style={{ padding:"13px 15px", display:"flex", alignItems:"center", justifyContent:"space-between",
                 borderBottom:`1px solid ${accent}25`, background:`${accent}10` }}>
                 <div style={{ display:"flex", alignItems:"center", gap:"10px" }}>
@@ -603,8 +620,8 @@ export default function ThreeDScene() {
                   <span style={{ color:"#1e293b", fontWeight:700, fontSize:"0.92rem" }}>{t(selectedObj.nameKey)}</span>
                 </div>
                 <button onClick={() => setSelectedId(null)}
-                  style={{ width:"26px", height:"26px", borderRadius:"6px", background:"rgba(0,0,0,0.06)",
-                    color:"#64748b", border:"none", cursor:"pointer", fontSize:"0.95rem", fontWeight:700 }}>×</button>
+                  style={{ width:"26px", height:"26px", borderRadius:"6px", background:"#f1f5f9",
+                    color:"#64748b", border:"1px solid #e2e8f0", cursor:"pointer", fontSize:"0.95rem", fontWeight:700 }}>×</button>
               </div>
               <div style={{ padding:"13px 15px", overflowY:"auto", flex:1 }}>
                 <p style={{ color:"#334155", fontSize:"0.83rem", lineHeight:1.65, margin:"0 0 12px" }}>{t(selectedObj.infoKey)}</p>
@@ -614,7 +631,7 @@ export default function ThreeDScene() {
                   <p style={{ color:accent, fontSize:"0.8rem", fontWeight:600, lineHeight:1.5, margin:0 }}>{t(selectedObj.factKey)}</p>
                 </div>
               </div>
-              <div style={{ padding:"10px 15px", borderTop:"1px solid rgba(0,0,0,0.06)" }}>
+              <div style={{ padding:"10px 15px", borderTop:"1px solid #e2e8f0" }}>
                 <button onClick={() => setSelectedId(null)}
                   style={{ width:"100%", padding:"0.55rem", borderRadius:"7px", background:accent,
                     color:"#fff", fontWeight:700, fontSize:"0.85rem", border:"none", cursor:"pointer" }}>
@@ -627,15 +644,15 @@ export default function ThreeDScene() {
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="shrink-0" style={{ borderTop:"1px solid rgba(0,0,0,0.1)", background:"rgba(255,255,255,0.95)",
-        backdropFilter:"blur(8px)", padding:"6px 20px 8px", display:"flex", flexDirection:"column", gap:"6px" }}>
+      <div className="shrink-0" style={{ borderTop:"1px solid #e2e8f0", background:"#ffffff",
+        padding:"6px 20px 8px", display:"flex", flexDirection:"column", gap:"6px" }}>
         {/* Instruction strip */}
         <div style={{ display:"flex", justifyContent:"center", alignItems:"center",
-          background:"rgba(241,245,249,0.9)", borderRadius:"8px", padding:"5px 16px", gap:"16px", flexWrap:"wrap" }}>
-          <span style={{ color:"#0f172a", fontSize:"0.82rem", fontWeight:700, letterSpacing:"0.01em" }}>
+          background:"#f8fafc", border:"1px solid #e2e8f0", borderRadius:"8px", padding:"5px 16px", gap:"16px", flexWrap:"wrap" }}>
+          <span style={{ color:"#1e293b", fontSize:"0.82rem", fontWeight:700, letterSpacing:"0.01em" }}>
             👆 Click on any component to learn more
           </span>
-          <span style={{ color:"#475569", fontSize:"0.79rem", fontWeight:500 }}>
+          <span style={{ color:"#64748b", fontSize:"0.79rem", fontWeight:500 }}>
             🖱️ Drag to rotate &nbsp;•&nbsp; Scroll to zoom
           </span>
         </div>
@@ -647,8 +664,8 @@ export default function ThreeDScene() {
             return (
               <button key={obj.id} onClick={() => setSelectedId(obj.id===selectedId?null:obj.id)}
                 style={{ padding:"4px 13px", borderRadius:"20px", fontSize:"0.78rem", fontWeight:600,
-                  border: isActive?`1.5px solid ${ac}`:"1.5px solid rgba(0,0,0,0.14)",
-                  background: isActive?`${ac}18`:"rgba(0,0,0,0.04)",
+                  border: isActive?`1.5px solid ${ac}`:"1.5px solid #e2e8f0",
+                  background: isActive?`${ac}18`:"#f8fafc",
                   color: isActive?ac:"#374151", cursor:"pointer", transition:"all 0.15s" }}>
                 {chipEmojis[obj.id]} {t(obj.nameKey)}
               </button>

@@ -25,28 +25,28 @@ export default function VideoPlayer() {
   return (
     <div
       className="w-full h-full flex flex-col overflow-hidden"
-      style={{ background: "#0f172a" }}
+      style={{ background: "#f8fafc" }}
     >
       {/* Header */}
       <div
         className="shrink-0 flex items-center justify-between px-8"
-        style={{ height: "64px", borderBottom: "1px solid rgba(255,255,255,0.08)", background: "rgba(15,23,42,0.95)" }}
+        style={{ height: "64px", borderBottom: "1px solid #e2e8f0", background: "#ffffff" }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <span style={{
-            background: "rgba(124,58,237,0.25)", color: "#a78bfa",
+            background: "rgba(124,58,237,0.1)", color: "#7c3aed",
             fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
             padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase"
           }}>
             Step 3 / 5
           </span>
-          <h1 style={{ color: "#f1f5f9", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
+          <h1 style={{ color: "#1e293b", fontSize: "1.1rem", fontWeight: 700, margin: 0 }}>
             🎬 {t("video.title")}
           </h1>
           <span style={{
             padding: "0.2rem 0.75rem", borderRadius: "20px",
-            background: `${badge.color}22`, color: badge.color,
-            fontSize: "0.78rem", fontWeight: 600, border: `1px solid ${badge.color}40`,
+            background: `${badge.color}15`, color: badge.color,
+            fontSize: "0.78rem", fontWeight: 600, border: `1px solid ${badge.color}35`,
           }}>
             {badge.label}
           </span>
@@ -56,8 +56,8 @@ export default function VideoPlayer() {
             onClick={() => setPage("age")}
             style={{
               padding: "0.5rem 1.25rem", borderRadius: "8px", fontSize: "0.9rem",
-              fontWeight: 600, background: "rgba(255,255,255,0.07)", color: "#94a3b8",
-              border: "1px solid rgba(255,255,255,0.1)", cursor: "pointer"
+              fontWeight: 600, background: "#f1f5f9", color: "#475569",
+              border: "1px solid #e2e8f0", cursor: "pointer"
             }}
           >
             ← {t("video.back")}
@@ -70,7 +70,7 @@ export default function VideoPlayer() {
               padding: "0.5rem 1.5rem", borderRadius: "8px", fontSize: "0.9rem",
               fontWeight: 700, background: "linear-gradient(135deg, #7c3aed, #2563eb)",
               color: "#ffffff", border: "none", cursor: "pointer",
-              boxShadow: "0 4px 14px rgba(124,58,237,0.4)"
+              boxShadow: "0 4px 14px rgba(124,58,237,0.35)"
             }}
           >
             {t("video.next")} →
@@ -79,7 +79,7 @@ export default function VideoPlayer() {
       </div>
 
       {/* Subtitle */}
-      <div className="shrink-0 px-8 py-3" style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+      <div className="shrink-0 px-8 py-3" style={{ borderBottom: "1px solid #e2e8f0", background: "#ffffff" }}>
         <p style={{ color: "#64748b", fontSize: "0.88rem", margin: 0 }}>{t("video.subtitle")}</p>
       </div>
 
@@ -91,8 +91,9 @@ export default function VideoPlayer() {
             height: "100%",
             borderRadius: "12px",
             overflow: "hidden",
-            border: "1px solid rgba(255,255,255,0.08)",
+            border: "1px solid #e2e8f0",
             background: "#000",
+            boxShadow: "0 4px 24px rgba(0,0,0,0.1)",
           }}
         >
           <iframe
