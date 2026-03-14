@@ -2,24 +2,34 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useApp, AgeGroup } from "@/context/AppContext";
 import { motion } from "framer-motion";
 
-const videoMap: Record<AgeGroup, string> = {
-  "5-10": "20Vb6hlLQSg",
+// English videos per age group
+const videoMapEn: Record<AgeGroup, string> = {
+  "5-10":  "20Vb6hlLQSg",
   "11-18": "mc979OhitAg",
-  "18+": "YQdN5JHj3kE",
+  "18+":   "YQdN5JHj3kE",
+};
+
+// Marathi video — same educational video shown for all age groups
+// Update these IDs with age-specific Marathi videos when available
+const videoMapMr: Record<AgeGroup, string> = {
+  "5-10":  "FKKAz_wQGFE",
+  "11-18": "FKKAz_wQGFE",
+  "18+":   "FKKAz_wQGFE",
 };
 
 const ageBadge: Record<AgeGroup, { label: string; color: string }> = {
-  "5-10": { label: "Ages 5–10 🧒", color: "#ec4899" },
+  "5-10":  { label: "Ages 5–10 🧒",  color: "#ec4899" },
   "11-18": { label: "Ages 11–18 🧑", color: "#7c3aed" },
-  "18+": { label: "Ages 18+ 👩‍🔬", color: "#10b981" },
+  "18+":   { label: "Ages 18+ 👩‍🔬",  color: "#10b981" },
 };
 
 export default function VideoPlayer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { setPage, ageGroup } = useApp();
 
-  const videoId = videoMap[ageGroup ?? "5-10"];
-  const badge = ageBadge[ageGroup ?? "5-10"];
+  const age = ageGroup ?? "5-10";
+  const videoId = language === "mr" ? videoMapMr[age] : videoMapEn[age];
+  const badge = ageBadge[age];
   const embedUrl = `https://www.youtube.com/embed/${videoId}?rel=0`;
 
   return (
@@ -36,7 +46,7 @@ export default function VideoPlayer() {
           <span style={{
             background: "rgba(124,58,237,0.1)", color: "#7c3aed",
             fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em",
-            padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase"
+            padding: "0.25rem 0.75rem", borderRadius: "4px", textTransform: "uppercase",
           }}>
             Step 3 / 5
           </span>
@@ -57,7 +67,7 @@ export default function VideoPlayer() {
             style={{
               padding: "0.5rem 1.25rem", borderRadius: "8px", fontSize: "0.9rem",
               fontWeight: 600, background: "#f1f5f9", color: "#475569",
-              border: "1px solid #e2e8f0", cursor: "pointer"
+              border: "1px solid #e2e8f0", cursor: "pointer",
             }}
           >
             ← {t("video.back")}
@@ -70,7 +80,7 @@ export default function VideoPlayer() {
               padding: "0.5rem 1.5rem", borderRadius: "8px", fontSize: "0.9rem",
               fontWeight: 700, background: "linear-gradient(135deg, #7c3aed, #2563eb)",
               color: "#ffffff", border: "none", cursor: "pointer",
-              boxShadow: "0 4px 14px rgba(124,58,237,0.35)"
+              boxShadow: "0 4px 14px rgba(124,58,237,0.35)",
             }}
           >
             {t("video.next")} →
@@ -83,20 +93,16 @@ export default function VideoPlayer() {
         <p style={{ color: "#64748b", fontSize: "0.88rem", margin: 0 }}>{t("video.subtitle")}</p>
       </div>
 
-      {/* Video — fills remaining space */}
+      {/* Video */}
       <div className="flex-1 min-h-0 p-6">
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "12px",
-            overflow: "hidden",
-            border: "1px solid #e2e8f0",
-            background: "#000",
-            boxShadow: "0 4px 24px rgba(0,0,0,0.1)",
-          }}
-        >
+        <div style={{
+          width: "100%", height: "100%",
+          borderRadius: "14px", overflow: "hidden",
+          border: "1px solid #e2e8f0", background: "#000",
+          boxShadow: "0 4px 24px rgba(0,0,0,0.1)",
+        }}>
           <iframe
+            key={videoId}
             src={embedUrl}
             style={{ width: "100%", height: "100%", border: "none", display: "block" }}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
