@@ -42,7 +42,6 @@
     "@react-three/fiber": "^9.5.0",
     "@tanstack/react-query": "catalog:",
     "@types/three": "^0.183.1",
-    "@workspace/api-client-react": "workspace:*",
     "canvas-confetti": "^1.9.4",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
