@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: electricity-exhibit
+    runtime: static
+    buildCommand: npm install -g pnpm@10.26.1 && pnpm install && pnpm --filter @workspace/electricity-exhibit run build
+    staticPublishPath: artifacts/electricity-exhibit/dist/public
+    pullRequestPreviewsEnabled: false
